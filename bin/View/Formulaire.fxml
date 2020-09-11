@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="914.0" prefWidth="1631.0" text="untitled" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.Controller">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="835.0" prefWidth="1629.0">
+         <children>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1631.0">
+               <children>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="493.0" prefWidth="1087.0">
+                           <children>
+                              <Label text="Veuillez entrer la note d'evaluation :" GridPane.rowIndex="1" />
+                              <TextField fx:id="note" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="35.0" prefWidth="379.0" text="Veuillez entrer la valeur x :" GridPane.rowIndex="2" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="x" />
+                              <TextField fx:id="r" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label prefHeight="35.0" prefWidth="431.0" text="Veuillez entrer la valeur r :" GridPane.rowIndex="3" />
+                              <Label prefHeight="35.0" prefWidth="340.0" text="La fonction Transformation" />
+                              <Button fx:id="calculate" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="168.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                  <TitledPane animated="false" prefHeight="368.0" prefWidth="1631.0" text="Output" GridPane.rowIndex="1">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextArea fx:id="output" layoutX="81.0" layoutY="41.0" prefHeight="200.0" prefWidth="732.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="547.0" minHeight="10.0" prefHeight="547.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="229.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children></AnchorPane>
+  </content>
+</TitledPane>
