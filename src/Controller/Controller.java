@@ -81,60 +81,49 @@ public class Controller {
 		System.out.println("initialize  controller ----");
 
 		calculateTransformation.setOnAction(event -> {
-			if (!isNumber(note.getText())) {
-				outputTransformation.setText("Veuillez entrer la valeur note valid¨¦e ");
-			} else if (!isNumber(x.getText())) {
-				outputTransformation.setText("Veuillez entrer la valeur x valid¨¦e (x>=0)");
-			} else if (!isNumber(r.getText())) {
-				outputTransformation.setText("Veuillez entrer la valeur r valid¨¦e (x>r>0)");
-			} else {
-				fonctionsTransformation(getNumber(note),getNumber(x),getNumber(r));
+			if(
+				Utils.checkInput(note, outputTransformation) &&
+				Utils.checkInput(x, outputTransformation) &&
+				Utils.checkInput(r, outputTransformation) 			
+			) {
+				fonctionsTransformation(Utils.getNumber(note),Utils.getNumber(x),Utils.getNumber(r));
 			}
 		});
 		
 		
 		calculateRevision.setOnAction(event -> {
-			checkInput(noteNew,outputRevision);
+			if(	
+				Utils.checkInput(noteNew, outputRevision) &&
+				Utils.checkInput(xNew, outputRevision) &&
+				Utils.checkInput(rNew, outputRevision) &&
+				Utils.checkInput(noteOld, outputRevision) &&
+				Utils.checkInput(xOld, outputRevision) &&
+				Utils.checkInput(rOld, outputRevision) 
+			){
+				Croyance cryNew = fonctionsTransformation(Utils.getNumber(noteNew),Utils.getNumber(xNew),Utils.getNumber(rNew));
+				Croyance cryOld = fonctionsTransformation(Utils.getNumber(noteOld),Utils.getNumber(xOld),Utils.getNumber(rOld));
+				Croyance res = sameEtat(cryNew, cryOld)? regleRevisionInterne(cryNew, cryOld) : moyenne(cryNew,cryOld);
+				outputRevision.setText(res.toString());
+			}
 		});
 		
+		
 		calculateFusion.setOnAction(event -> {
-
-			System.out.println("calculateFusion  clicked");
-			
-			
-			if (!isNumber(croyance_locale_a.getText())) {
-				croyance_locale_a.setStyle("-fx-text-inner-color: red;");
-				outputFusion.setText("Veuillez entrer la valeur valid¨¦e ");
-			} else if (!isNumber(croyance_locale_n.getText())) {
-				croyance_locale_n.setStyle("-fx-text-inner-color: red;");
-				outputFusion.setText("Veuillez entrer la valeur valid¨¦e ");
-			} else if (!isNumber(croyance_locale_i.getText())) {
-				croyance_locale_i.setStyle("-fx-text-inner-color: red;");
-				outputFusion.setText("Veuillez entrer la valeur valid¨¦e ");
-			} else if (!isNumber(croyance_locale_c.getText())) {
-				croyance_locale_c.setStyle("-fx-text-inner-color: red;");
-				outputFusion.setText("Veuillez entrer la valeur valid¨¦e ");
-			} else if (!isNumber(croyance_propa_a.getText())) {
-				croyance_propa_a.setStyle("-fx-text-inner-color: red;");
-				outputFusion.setText("Veuillez entrer la valeur valid¨¦e ");
-			} else if (!isNumber(croyance_propa_n.getText())) {
-				croyance_propa_n.setStyle("-fx-text-inner-color: red;");
-				outputFusion.setText("Veuillez entrer la valeur valid¨¦e ");
-			} else if (!isNumber(croyance_propa_i.getText())) {
-				croyance_propa_i.setStyle("-fx-text-inner-color: red;");
-				outputFusion.setText("Veuillez entrer la valeur valid¨¦e ");
-			} else if (!isNumber(croyance_propa_c.getText())) {
-				croyance_propa_c.setStyle("-fx-text-inner-color: red;");
-				outputFusion.setText("Veuillez entrer la valeur valid¨¦e ");
-			} else {
-
+			if(	
+				Utils.checkInput(croyance_locale_a, outputFusion) &&
+				Utils.checkInput(croyance_locale_n, outputFusion) &&
+				Utils.checkInput(croyance_locale_i, outputFusion) &&
+				Utils.checkInput(croyance_locale_c, outputFusion) &&
+				Utils.checkInput(croyance_propa_a, outputFusion) &&
+				Utils.checkInput(croyance_propa_n, outputFusion) &&
+				Utils.checkInput(croyance_propa_i, outputFusion) &&
+				Utils.checkInput(croyance_propa_c, outputFusion) 
+			){
 				System.out.println("calculate fusion");
 				Croyance res = fusion(
-						new Croyance(getNumber(croyance_locale_a),getNumber(croyance_locale_n),getNumber(croyance_locale_i),getNumber(croyance_locale_c)),
-						new Croyance(getNumber(croyance_propa_a),getNumber(croyance_propa_n),getNumber(croyance_propa_i),getNumber(croyance_propa_c))
+						new Croyance(Utils.getNumber(croyance_locale_a),Utils.getNumber(croyance_locale_n),Utils.getNumber(croyance_locale_i),Utils.getNumber(croyance_locale_c)),
+						new Croyance(Utils.getNumber(croyance_propa_a),Utils.getNumber(croyance_propa_n),Utils.getNumber(croyance_propa_i),Utils.getNumber(croyance_propa_c))
 				);
-
-				System.out.println("calculate fusion res ="+res.toString());
 				outputFusion.setText(res.toString());
 			}
 		});
@@ -143,15 +132,7 @@ public class Controller {
 	}
 	
 	
-	private boolean checkInput(TextField text, TextArea output) {
-		if(!isNumber(text.getText())) {
-			text.setStyle("-fx-text-inner-color: red;");
-			output.setText("Veuillez entrer la valeur valid¨¦e ");
-			return false;
-		}
-		return true;
-	}
-	
+
 	private Croyance regleRevisionInterne(Croyance cryI, Croyance cryA) {
 		final float a = cryI.getA()/(cryI.getA()*cryI.getN()*cryI.getI())*cryA.getI()+cryA.getA();
 		final float n = cryI.getN()/(cryI.getA()*cryI.getN()*cryI.getI())*cryA.getI()+cryA.getN();
@@ -210,11 +191,10 @@ public class Controller {
 	}
 	
 
-	private void fonctionsTransformation(float note, float x, float r) {
+	private Croyance fonctionsTransformation(float note, float x, float r) {
 		String outputText = "Veuillez v¨¦rifier les donn¨¦es entr¨¦es";
-		Croyance croyance;
+		Croyance croyance = new Croyance(0, 1, 0, 0);
 		if (note <= (x - r)) {
-			croyance = new Croyance(0, 1, 0, 0);
 			outputText = croyance.toString();
 		} else if (note <= x && note > (x - r)) {
 			croyance = new Croyance(0, calculateZone1N(note, x, r), calculateZone1I(note, x, r), 0);
@@ -227,6 +207,7 @@ public class Controller {
 			outputText = croyance.toString();
 		}
 		outputTransformation.setText(outputText);
+		return croyance;
 	}
 
 	private float calculateZone2A(float note, float x, float r) {
@@ -253,17 +234,6 @@ public class Controller {
 		float res = -1 * note + x;
 		res /= r;
 		return res;
-	}
-
-	
-	
-	
-	private boolean isNumber(String text){
-		return text.matches("^[0-9]*\\.?[0-9]*$");
-	}
-	
-	private float getNumber(TextField text) {
-		return Float.parseFloat(text.getText());
 	}
 	
 	
