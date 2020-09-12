@@ -101,7 +101,12 @@ public class Controller {
 				Croyance cryNew = Transformation.fonctionsTransformation(Utils.getNumber(noteNew),Utils.getNumber(xNew),Utils.getNumber(rNew));
 				Croyance cryOld = Transformation.fonctionsTransformation(Utils.getNumber(noteOld),Utils.getNumber(xOld),Utils.getNumber(rOld));
 				Croyance res = Revision.sameEtat(cryNew, cryOld)? Revision.regleRevisionInterne(cryNew, cryOld) : Revision.moyenne(cryNew,cryOld);
-				outputRevision.setText(res.toString());
+				String procedure = Revision.sameEtat(cryNew, cryOld)? " procedure: regle revision interne ":" procedure: moyenne ";
+				outputRevision.setText(
+						"Nouvelle Croyance : " + cryNew.toString() + "\n" +
+						"Ancienne Croyance : " + cryOld.toString() + "\n" +
+						procedure + "\n" +
+						res.toString());
 			}
 		});
 		
@@ -117,11 +122,14 @@ public class Controller {
 				Utils.checkInput(croyance_propa_i, outputFusion) &&
 				Utils.checkInput(croyance_propa_c, outputFusion) 
 			){
-				Croyance res = Fusion.fusion(
-						new Croyance(Utils.getNumber(croyance_locale_a),Utils.getNumber(croyance_locale_n),Utils.getNumber(croyance_locale_i),Utils.getNumber(croyance_locale_c)),
-						new Croyance(Utils.getNumber(croyance_propa_a),Utils.getNumber(croyance_propa_n),Utils.getNumber(croyance_propa_i),Utils.getNumber(croyance_propa_c))
-				);
-				outputFusion.setText(res.toString());
+				Croyance cryLocale = new Croyance(Utils.getNumber(croyance_locale_a),Utils.getNumber(croyance_locale_n),Utils.getNumber(croyance_locale_i),Utils.getNumber(croyance_locale_c));
+				Croyance cryPropa = new Croyance(Utils.getNumber(croyance_propa_a),Utils.getNumber(croyance_propa_n),Utils.getNumber(croyance_propa_i),Utils.getNumber(croyance_propa_c));
+				Croyance res = Fusion.fusion(cryLocale,cryPropa);
+				outputFusion.setText(
+						"Croyance Locale : " + cryLocale.toString() + "\n" +
+						"Croyance Propag¨¦e : " + cryPropa.toString() + "\n" +
+						"apr¨¨s fonction fusion: " +	res.toString()
+						);
 			}
 		});
 		
