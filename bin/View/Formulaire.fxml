@@ -4,57 +4,197 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="914.0" prefWidth="1631.0" text="untitled" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.Controller">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="835.0" prefWidth="1629.0">
-         <children>
-            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1631.0">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="924.0" prefWidth="1411.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+  <tabs>
+    <Tab text="Transformation">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1631.0">
                      <children>
-                        <GridPane prefHeight="493.0" prefWidth="1087.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label text="Veuillez entrer la note d'evaluation :" GridPane.rowIndex="1" />
-                              <TextField fx:id="note" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label prefHeight="35.0" prefWidth="379.0" text="Veuillez entrer la valeur x :" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="x" />
-                              <TextField fx:id="r" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label prefHeight="35.0" prefWidth="431.0" text="Veuillez entrer la valeur r :" GridPane.rowIndex="3" />
-                              <Label prefHeight="35.0" prefWidth="340.0" text="La fonction Transformation" />
-                              <Button fx:id="calculate" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="168.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-                  <TitledPane animated="false" prefHeight="368.0" prefWidth="1631.0" text="Output" GridPane.rowIndex="1">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TextArea fx:id="output" layoutX="81.0" layoutY="41.0" prefHeight="200.0" prefWidth="732.0" />
+                              <GridPane prefHeight="531.0" prefWidth="1199.0">
+                                 <children>
+                                    <Label text="Veuillez entrer la note d'evaluation :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="note" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label prefHeight="35.0" prefWidth="379.0" text="Veuillez entrer la valeur x :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" fx:id="x" />
+                                    <TextField fx:id="r" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Label prefHeight="35.0" prefWidth="431.0" text="Veuillez entrer la valeur r :" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label prefHeight="35.0" prefWidth="340.0" text="La fonction Transformation" GridPane.columnIndex="1" />
+                                    <Button fx:id="calculateTransformation" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="6.0" prefWidth="6.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="719.0" minWidth="10.0" prefWidth="499.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.0" minWidth="10.0" prefWidth="451.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="168.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
                            </children>
                         </AnchorPane>
-                    </content>
-                  </TitledPane>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="547.0" minHeight="10.0" prefHeight="547.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="229.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </children></AnchorPane>
-  </content>
-</TitledPane>
+                        <TitledPane animated="false" prefHeight="368.0" prefWidth="1631.0" text="Output" GridPane.rowIndex="1">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextArea fx:id="outputTransformation" layoutX="48.0" layoutY="20.0" prefHeight="167.0" prefWidth="825.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="547.0" minHeight="10.0" prefHeight="547.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="229.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Révision">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1631.0">
+                     <children>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane layoutY="27.0" prefHeight="466.0" prefWidth="1323.0">
+                                 <children>
+                                    <Label text="Veuillez entrer la note d'evaluation :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="noteNew" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label prefHeight="35.0" prefWidth="379.0" text="Veuillez entrer la valeur x :" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" fx:id="xNew" />
+                                    <TextField fx:id="rNew" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <Label prefHeight="35.0" prefWidth="431.0" text="Veuillez entrer la valeur r :" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label prefHeight="35.0" prefWidth="340.0" text="La fonction Transformation" GridPane.columnIndex="1" />
+                                    <Button fx:id="calculateRevision" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <Label text="Nouvelle Croyance" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Ancienne Croyance" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                    <TextField fx:id="noteOld" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                    <TextField GridPane.columnIndex="4" GridPane.rowIndex="3" fx:id="xOld" />
+                                    <TextField fx:id="rOld" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="0.0" prefWidth="33.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="502.0" minWidth="10.0" prefWidth="487.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.0" minWidth="10.0" prefWidth="346.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="426.0" minWidth="10.0" prefWidth="121.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0" prefWidth="318.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                        <TitledPane animated="false" prefHeight="368.0" prefWidth="1631.0" text="Output" GridPane.rowIndex="1">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextArea fx:id="outputRevision" layoutX="40.0" layoutY="14.0" prefHeight="200.0" prefWidth="732.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="547.0" minHeight="10.0" prefHeight="547.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="229.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Propagation">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+         </content>
+      </Tab>
+      <Tab text="Fusion">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1631.0">
+                     <children>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane prefHeight="554.0" prefWidth="1288.0">
+                                 <children>
+                                    <Label text="A" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="croyance_locale_a" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label prefHeight="35.0" prefWidth="379.0" text="non A" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="croyance_locale_n" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <TextField fx:id="croyance_locale_i" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <Label prefHeight="35.0" prefWidth="431.0" text="I" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label prefHeight="35.0" prefWidth="626.0" text="la fusion de la croyance locale et la croyance propagée" GridPane.columnIndex="1" />
+                                    <Button fx:id="calculateFusion" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                    <Label text="Croyance locale" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Croyance propagée" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                    <TextField fx:id="croyance_propa_a" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                    <TextField fx:id="croyance_propa_n" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                    <TextField fx:id="croyance_propa_i" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                    <TextField fx:id="croyance_locale_c" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <TextField fx:id="croyance_propa_c" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                    <Label text="C" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="701.0" minWidth="10.0" prefWidth="129.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="874.0" minWidth="10.0" prefWidth="708.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="290.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="96.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="293.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                        <TitledPane animated="false" prefHeight="368.0" prefWidth="1631.0" text="Output" GridPane.rowIndex="1">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextArea fx:id="outputFusion" layoutX="53.0" layoutY="14.0" prefHeight="159.0" prefWidth="762.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="547.0" minHeight="10.0" prefHeight="547.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="229.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children></AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
