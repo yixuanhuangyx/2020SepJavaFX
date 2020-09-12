@@ -40,9 +40,23 @@ public class Controller {
 	private TextArea outputRevision;
 	
 	
-	
+
+	@FXML
+	private TextField croyance_a;
+	@FXML
+	private TextField croyance_n;
+	@FXML
+	private TextField croyance_i;
+	@FXML
+	private TextField croyance_c;
+	@FXML
+	private TextField n;
+	@FXML
+	private TextField d;
 	@FXML
 	private Button calculatePropagation;
+	@FXML
+	private TextArea outputPropagation;
 	
 
 	
@@ -110,6 +124,23 @@ public class Controller {
 			}
 		});
 		
+		
+		calculatePropagation.setOnAction(event -> {
+			if(	
+					Utils.checkInput(croyance_a, outputPropagation) &&
+					Utils.checkInput(croyance_n, outputPropagation) &&
+					Utils.checkInput(croyance_i, outputPropagation) &&
+					Utils.checkInput(croyance_c, outputPropagation) &&
+					Utils.checkInput(d, outputPropagation) &&
+					Utils.checkInput(n, outputPropagation) 
+				){
+					Croyance cry = new Croyance(Utils.getNumber(croyance_a),Utils.getNumber(croyance_n),Utils.getNumber(croyance_i),Utils.getNumber(croyance_c));
+					Croyance res ;
+					outputRevision.setText(
+							"Croyance : " + cry.toString() + "\n" +
+							 res.toString());
+				}
+		});
 		
 		calculateFusion.setOnAction(event -> {
 			if(	
