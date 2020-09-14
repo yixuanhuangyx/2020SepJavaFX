@@ -28,4 +28,8 @@ public class Utils {
 	public static float getNumber(TextField text) {
 		return Float.parseFloat(text.getText());
 	}
+	
+	public static int getNumberInteger(TextField text) {
+		return Integer.parseInt(text.getText());
+	}
 }

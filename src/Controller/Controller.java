@@ -135,10 +135,8 @@ public class Controller {
 					Utils.checkInput(n, outputPropagation) 
 				){
 					Croyance cry = new Croyance(Utils.getNumber(croyance_a),Utils.getNumber(croyance_n),Utils.getNumber(croyance_i),Utils.getNumber(croyance_c));
-					Croyance res ;
-					outputRevision.setText(
-							"Croyance : " + cry.toString() + "\n" +
-							 res.toString());
+					Croyance res = Propagation.propagation(Utils.getNumberInteger(n), Utils.getNumber(d), cry);
+					outputPropagation.setText( res.toString());
 				}
 		});
 		

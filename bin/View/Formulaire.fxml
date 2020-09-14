@@ -134,7 +134,6 @@
                            <children>
                               <GridPane layoutY="35.0" prefHeight="498.0" prefWidth="1341.0">
                                  <children>
-                                    <Label text="Veuillez entrer les valeur de la croyance:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label prefHeight="35.0" prefWidth="379.0" text="a" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <TextField fx:id="croyance_a" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                     <TextField fx:id="croyance_n" GridPane.columnIndex="2" GridPane.rowIndex="3" />
@@ -149,6 +148,7 @@
                                     <TextField fx:id="d" GridPane.columnIndex="5" GridPane.rowIndex="3" />
                                     <Label prefHeight="35.0" prefWidth="379.0" text="n" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                                     <Label prefHeight="35.0" prefWidth="379.0" text="d" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                    <Label text="la croyance de la competence X:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="6.0" prefWidth="46.0" />
