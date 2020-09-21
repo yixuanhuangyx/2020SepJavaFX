@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  *
  * @author yixuanhuangyx@gmail.com
  */
-public class Main extends Application {
+public class ApplicationApp extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
