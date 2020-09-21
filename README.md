@@ -14,5 +14,8 @@ The GUI has 4 sections, represent respectivily four fonctions : **Transformation
 Each section has two parts: Input Field at the top and Output Console at the bottom
 
 
+### Input Field
+Check the input value matche the correct number format (double or integer)
+
 ### Output Console
 Output the colored text about the error message or results
