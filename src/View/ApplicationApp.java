@@ -8,15 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-/**
- *
- * @author yixuanhuangyx@gmail.com
- */
-public class ApplicationApp extends Application {
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+public class ApplicationApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
