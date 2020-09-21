@@ -4,7 +4,7 @@
 
 ## How to use
 
-[Download Latest Relase]
+[Download Latest Relase](https://github.com/yixuanhuangyx/2020SepJavaFX/releases/tag/1.0)
 
 ## MVC
 
