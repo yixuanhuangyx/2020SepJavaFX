@@ -1,11 +1,12 @@
 # Calculate Croyance
-``Calculate with four fondamentory fonctions: Transformation, Revision, Propagation, Fusion.   With a simple JavaFX GUI. `` 
+``Calculate with four fondamentory fonctions: Transformation, Revision, Propagation, Fusion.`` 
+``With a simple JavaFX GUI provided. `` 
 
 ## How to use
 
 [Download Latest Relase](https://github.com/  .jar) 
 
-##MVC
+## MVC
 
 ## GUI
 
