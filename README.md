@@ -4,7 +4,7 @@
 
 ## How to use
 
-[Download Latest Relase](https://github.com/yixuanhuangyx/2020SepJavaFX/releases/download/1.0/fonctions2020-0.0.1-SNAPSHOT.jar)
+[Download Latest Relase](https://github.com/yixuanhuangyx/2020SepJavaFX/releases/download/1.1/fonctions2020-0.0.1-SNAPSHOT.jar)
 
 ## MVC
 
