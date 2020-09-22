@@ -1,10 +1,10 @@
-package Controller;
+package controller;
 
-import Model.Croyance;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.Croyance;
 
 public class Controller {
 
@@ -156,8 +156,8 @@ public class Controller {
 				Croyance res = Fusion.fusion(cryLocale,cryPropa);
 				outputFusion.setText(
 						"Croyance Locale : " + cryLocale.toString() + "\n" +
-						"Croyance Propag¨¦e : " + cryPropa.toString() + "\n" +
-						"apr¨¨s fonction fusion: " +	res.toString()
+						"Croyance avec Propagation : " + cryPropa.toString() + "\n" +
+						"Croyance avec Fusion: " +	res.toString()
 						);
 			}
 		});

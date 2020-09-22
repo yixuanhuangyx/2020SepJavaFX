@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import javafx.application.Preloader;
 import javafx.application.Preloader.StateChangeNotification.Type;

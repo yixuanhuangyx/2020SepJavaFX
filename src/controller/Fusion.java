@@ -1,6 +1,6 @@
-package Controller;
+package controller;
 
-import Model.Croyance;
+import model.Croyance;
 
 public class Fusion {
 

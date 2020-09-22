@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 /**
  *
@@ -6,8 +6,8 @@ package Main;
  */
 import com.sun.javafx.application.LauncherImpl;
 
-import View.ApplicationApp;
-import View.ApplicationPreloader;
+import view.ApplicationApp;
+import view.ApplicationPreloader;
 
 
 public class Main {

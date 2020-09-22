@@ -1,6 +1,6 @@
-package Controller;
+package controller;
 
-import Model.Croyance;
+import model.Croyance;
 
 public class Propagation {
 	public static Croyance propagation(int n, float d, Croyance B) {

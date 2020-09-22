@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +14,7 @@ public class ApplicationApp extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-			final String viewAdress = "Formulaire.fxml";
+			final String viewAdress = "formulaire.fxml";
 			final Parent root = FXMLLoader.load(getClass().getResource(viewAdress));
 
 			Scene scene = new Scene(root);

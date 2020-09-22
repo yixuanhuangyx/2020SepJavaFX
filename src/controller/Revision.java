@@ -1,7 +1,7 @@
-package Controller;
+package controller;
 
-import Model.Croyance;
-import Model.etatEnum;
+import model.Croyance;
+import model.etatEnum;
 
 public class Revision {
 
