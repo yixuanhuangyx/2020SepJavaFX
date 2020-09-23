@@ -8,7 +8,7 @@ public class Propagation {
 		Croyance res = new Croyance(
 				factor * B.getA(), 
 				factor * B.getN(), 
-				factor * B.getI(), 
+				factor * B.getI() + d, 
 				factor * B.getC()
 				);
 		return res;
