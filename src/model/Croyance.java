@@ -1,11 +1,11 @@
 package model;
 
+
 public class Croyance {
 	float a;
 	float n;
 	float i;
 	float c;
-	
 	
 	
 	public Croyance(float a, float n, float i, float c) {
