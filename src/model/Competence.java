@@ -1,5 +1,6 @@
 package model;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -62,6 +63,25 @@ public class Competence {
 		this.r = new SimpleStringProperty(r);
 		this.croyance = new SimpleStringProperty(croyance);
 		this.etat = new SimpleStringProperty(etat);
+	}
+	
+	public Competence(CompetenceBean cp) throws ParseException {
+		this.name = new SimpleStringProperty(cp.getName());
+		
+		Date cDate = new SimpleDateFormat("yyyy-MM-dd").parse(cp.getCreatedDate());
+		LocalDate cLocalDate = cDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	
+		Date mDate = new SimpleDateFormat("yyyy-MM-dd").parse(cp.getLastModifiedDate());
+		LocalDate mLocalDate = mDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		
+		this.createdDate = new SimpleObjectProperty(cLocalDate);
+		this.lastModifiedDate = new SimpleObjectProperty(mLocalDate);
+		
+		this.noteEvaluation = new SimpleStringProperty(cp.getNoteEvaluation());
+		this.x = new SimpleStringProperty(cp.getX());
+		this.r = new SimpleStringProperty(cp.getR());
+		this.croyance = new SimpleStringProperty(cp.getCroyance());
+		this.etat = new SimpleStringProperty(cp.getEtat());
 	}
 	
 	public StringProperty nameProperty() {

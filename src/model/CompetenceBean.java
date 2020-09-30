@@ -10,11 +10,13 @@ public class CompetenceBean {
 	String createdDate;
 	String lastModifiedDate;
 	
-	Float noteEvaluation;
-	Float x;
-	Float r;
-	Croyance croyance; // TODO: toJsonObject
-	etatEnum etat;
+	String noteEvaluation;
+	String x;
+	String r;
+	//	Croyance croyance; // TODO: toJsonObject
+	String croyance; // TODO: toJsonObject
+	//	etatEnum etat;
+	String etat;
 	
 	Map<Integer, Float> prerequises;	// <id, distance> 
 	
@@ -26,61 +28,135 @@ public class CompetenceBean {
 		name = g.nameProperty().getValue();
 		createdDate = g.createdDateProperty().getValue().format(Utils.dateFormatter);
 		lastModifiedDate = g.lastModifiedDateProperty().getValue().format(Utils.dateFormatter);
-		noteEvaluation
+		noteEvaluation = g.noteEvaluationProperty().getValue();
+		x = g.xProperty().getValue();
+		r = g.rProperty().getValue();
+		croyance = g.croyanceProperty().getValue();
+		etat = g.etatProperty().getValue();
 	}
-	
-	
-	
-	
+
+
+
 	public Integer getId() {
 		return id;
 	}
+
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
+
 	public String getName() {
 		return name;
 	}
+
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Float getNoteEvaluation() {
+
+
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+
+
+
+	public String getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+
+
+	public void setLastModifiedDate(String lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+
+
+
+	public String getNoteEvaluation() {
 		return noteEvaluation;
 	}
-	public void setNoteEvaluation(Float noteEvaluation) {
+
+
+
+	public void setNoteEvaluation(String noteEvaluation) {
 		this.noteEvaluation = noteEvaluation;
 	}
-	public Float getX() {
+
+
+
+	public String getX() {
 		return x;
 	}
-	public void setX(Float x) {
+
+
+
+	public void setX(String x) {
 		this.x = x;
 	}
-	public Float getR() {
+
+
+
+	public String getR() {
 		return r;
 	}
-	public void setR(Float r) {
+
+
+
+	public void setR(String r) {
 		this.r = r;
 	}
-	public Croyance getCroyance() {
+
+
+
+	public String getCroyance() {
 		return croyance;
 	}
-	public void setCroyance(Croyance croyance) {
+
+
+
+	public void setCroyance(String croyance) {
 		this.croyance = croyance;
 	}
-	public etatEnum getEtat() {
+
+
+
+	public String getEtat() {
 		return etat;
 	}
-	public void setEtat(etatEnum etat) {
+
+
+
+	public void setEtat(String etat) {
 		this.etat = etat;
 	}
+
+
+
 	public Map<Integer, Float> getPrerequises() {
 		return prerequises;
 	}
+
+
+
 	public void setPrerequises(Map<Integer, Float> prerequises) {
 		this.prerequises = prerequises;
 	}
-
+	
+	
+	
 
 	
 

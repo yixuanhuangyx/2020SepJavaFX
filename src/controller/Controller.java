@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,15 +10,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import model.Competence;
+import model.CompetenceBean;
 import model.Croyance;
 import model.DataTreeViewRoot;
 import model.Workspace;
@@ -102,14 +100,7 @@ public class Controller {
 	private TextArea outputFusion;
 	
 	
-	
-	@FXML
-	private TreeView<Object> dataTreeView;
 
-	@FXML
-	private Button createNewBtn;
-	@FXML
-	private Button saveBtn;
 	
 	
 	@FXML 
@@ -131,17 +122,24 @@ public class Controller {
 	@FXML
 	private ListView<Object> cp_prerequises;
 	
-	
-	
+
 	private Competence cp;
-	private DataTreeViewRoot root;
 	
+	
+	@FXML
+	private TreeView<Object> dataTreeView;
+	@FXML
+	private Button createNewBtn;
+	@FXML
+	private Button saveBtn;
+	
+	private DataTreeViewRoot root = new DataTreeViewRoot();
+	private TreeItem<Object> rootNode;
 	private ObservableList<Competence> cps = FXCollections.observableArrayList();
-	private TreeItem<Object> treeItemSelected = new TreeItem<Object>();
 
 
 	private Workspace workspace = new Workspace();
-	private String path = "db\\db.json";
+	private String path = "data\\data.json";
 	private File file= new File(path);
 	
 	
@@ -163,6 +161,7 @@ public class Controller {
 		cp_r.textProperty().bindBidirectional(cp.rProperty());
 	
 		
+//		loadData();
 		
 
 //		sexGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
@@ -211,11 +210,61 @@ public class Controller {
 	
 	}
 	
+	private void loadData() {
+		try {
+			cps.clear();
+			System.out.println("load cps size-- "+cps.size());
+
+			ArrayList<CompetenceBean> cpsValue = workspace.fromFile(file);
+			System.out.println("load cpsValueSize-- "+cpsValue.size());
+			
+			for(CompetenceBean cp : cpsValue) {
+				cps.add(new Competence(cp));
+			}
+			System.out.println("load cps size-- "+cps.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 initializeTree();
+		 // TODO: add listener
+	}
+	
+	private void initializeTree() {
+		rootNode = new TreeItem<Object>(root);
+		rootNode.setExpanded(true);
+		
+		for (Competence cp : cps) {
+			TreeItem<Object> cpLeaf = new TreeItem<Object>(cp);
+			rootNode.getChildren().add(cpLeaf);
+		}
+		
+		dataTreeView = new TreeView<Object>(rootNode);
+
+		dataTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldVal, newVal) -> {
+			if(newVal.getValue() instanceof Competence) {
+				cp.nameProperty().setValue(((Competence)newVal.getValue()).nameProperty().get());
+				cp.createdDateProperty().setValue(((Competence)newVal.getValue()).createdDateProperty().get());
+				cp.lastModifiedDateProperty().setValue(((Competence)newVal.getValue()).lastModifiedDateProperty().get());
+				
+				cp.noteEvaluationProperty().setValue(((Competence)newVal.getValue()).noteEvaluationProperty().get());
+				cp.xProperty().setValue(((Competence)newVal.getValue()).xProperty().get());
+				cp.rProperty().setValue(((Competence)newVal.getValue()).rProperty().get());
+				
+				cp.croyanceProperty().setValue(((Competence)newVal.getValue()).croyanceProperty().get());
+				cp.etatProperty().setValue(((Competence)newVal.getValue()).etatProperty().get());
+
+			}
+		});
+
+	}
+	
+	
 	private void addEventToCreateNewBtn() {
 		createNewBtn.setOnAction(event -> {
 			cp.videCompetence();
 		});
 	}
+	
 	
 	private void addEventToSaveBtn() {
 		saveBtn.setOnAction(event -> {
@@ -293,10 +342,9 @@ public class Controller {
 			}
 			
 			
-			if(root!=null && dataValidated) {
+			if(dataValidated) {
 				Competence newCp = addCompetence();
 				root.listCPsProperty().add(newCp);
-
 
 				try {
 					workspace.setData(cps);

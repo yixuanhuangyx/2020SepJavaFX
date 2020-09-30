@@ -12,9 +12,8 @@ import javafx.collections.ObservableList;
 public class Workspace {
 
 	private ObjectMapper mapper = new ObjectMapper();
-	
 
-	private ArrayList<CompetenceBean> groups = new ArrayList<CompetenceBean>();
+	private ArrayList<CompetenceBean> cps = new ArrayList<CompetenceBean>();
 
 	public ArrayList<CompetenceBean> fromFile(File file) throws Exception{
 
@@ -24,13 +23,13 @@ public class Workspace {
 	}
 	
 	public void save(File f) throws Exception{
-		mapper.writeValue(f, groups);
+		mapper.writeValue(f, cps);
 	}
 	
-	public void setData(ObservableList<Competence> grps) throws Exception {
-		groups.clear();
-		for (Competence g : grps) {
-//			groups.add(new CompetenceBean(g));
+	public void setData(ObservableList<Competence> valueList) throws Exception {
+		cps.clear();
+		for (Competence g : valueList) {
+			cps.add(new CompetenceBean(g));
 		}	
 	}
 }

@@ -7,7 +7,7 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="924.0" prefWidth="1411.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
   <tabs>
-      <Tab text="Database">
+      <Tab text="Dataset">
          <content>
             <ScrollPane prefHeight="826.0" prefWidth="1411.0">
               <content>
