@@ -123,8 +123,6 @@ public class Controller {
 	private ListView<Object> cp_prerequises;
 	
 
-	private Competence cp;
-	
 	
 	@FXML
 	private TreeView<Object> dataTreeView;
@@ -133,10 +131,16 @@ public class Controller {
 	@FXML
 	private Button saveBtn;
 	
-	private DataTreeViewRoot root = new DataTreeViewRoot();
-	private TreeItem<Object> rootNode;
-	private ObservableList<Competence> cps = FXCollections.observableArrayList();
 
+
+	private DataTreeViewRoot root = new DataTreeViewRoot();
+	private Etudiant etuSelected = null;
+	private Competence cp;
+	
+	private ObservableList<Competence> etus = FXCollections.observableArrayList();
+
+	private TreeItem<Object> treeItemSelected = new TreeItem<Object>();
+	private TreeItem<Object> rootNode;
 
 	private Workspace workspace = new Workspace();
 	private String path = "data\\data.json";
