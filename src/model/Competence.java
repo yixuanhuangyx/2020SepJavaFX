@@ -31,9 +31,17 @@ public class Competence {
 	// TODO: get separed field
 	StringProperty etat;
 	
-	Map<Integer, Float> prerequises;	// <id, distance> 
+	Map<String, Float> prerequises;	// <id, distance> 
 	
 	
+	public Map<String, Float> getPrerequises() {
+		return prerequises;
+	}
+
+	public void setPrerequises(Map<String, Float> prerequises) {
+		this.prerequises = prerequises;
+	}
+
 	public Competence() {
 		this.name = new SimpleStringProperty();
 		this.createdDate = new SimpleObjectProperty();

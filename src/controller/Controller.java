@@ -3,7 +3,11 @@ package controller;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -11,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -129,8 +134,17 @@ public class Controller {
 	private TextField cp_x;
 	@FXML 
 	private TextField cp_r;
+	
+	
 	@FXML
-	private ListView<Object> cp_prerequises;
+	private GridPane prePane;
+	@FXML
+	private TreeView<Object> cp_prerequises;
+	//private ListView<Object> cp_prerequises;
+	@FXML
+	private Button addPreBtn;
+	@FXML
+	private Label preNumberLabel;
 	
 
 	
@@ -139,8 +153,9 @@ public class Controller {
 	@FXML
 	private Button createNewBtn;
 	@FXML
+	private Button deleteBtn;
+	@FXML
 	private Button saveBtn;
-	
 
 
 	private DataTreeViewRoot root = new DataTreeViewRoot();
@@ -160,7 +175,9 @@ public class Controller {
 	@FXML
 	public void initialize() {
 		System.out.println("initialize  controller ----");
-
+		
+		cpPane.visibleProperty().setValue(false);
+		
 		cp = new Competence();
 
 		cp_name.textProperty().bindBidirectional(cp.nameProperty());
@@ -186,15 +203,15 @@ public class Controller {
 
 
 		// force the field to be numeric only
-//		textField.textProperty().addListener(new ChangeListener<String>() {
-//		    @Override
-//		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-//		        String newValue) {
-//		        if (!newValue.matches("\\d*")) {
-//		            textField.setText(newValue.replaceAll("[^\\d]", ""));
-//		        }
-//		    }
-//		});
+		cp_note.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("^[-+]?\\d*\\.?\\d*$")) {
+		            cp_note.setText("");
+		        }
+		    }
+		});
 		
 		addEventToTransformationBtn();
 		addEventToRevisionBtn();
@@ -204,8 +221,9 @@ public class Controller {
 
 		addEventToCreateNewBtn();
 		addEventToSaveBtn();
-		// addEventToDeleteBtn();
+		addEventToDeleteBtn();
 		
+		addEventToCreateNewPreBtn();
 		
 		//-- addEventToMenuBar()
 		//save menu btn 
@@ -281,6 +299,23 @@ public class Controller {
 		etus.addListener(f);
 	}
 
+	private void initializePreTree() {
+		TreeItem<Object> preTreeItem = new TreeItem<Object>("Prerequises");
+		preTreeItem.setExpanded(true);
+		
+		Map<String, Float> presMap = cp.getPrerequises();
+		for (Map.Entry<String,Float> entry : presMap.entrySet()) {
+			TreeItem<Object> preLeaf = new TreeItem<Object>(entry.getKey()+":"+entry.getValue());
+			preTreeItem.getChildren().add(preLeaf);
+		}
+//		for (Prerequises pre : cpSelected.getListPres()) {
+//			TreeItem<Object> preLeaf = new TreeItem<Object>(pre);
+//		}
+		TreeView<Object> preTreeView = new TreeView<Object>(preTreeItem);
+		preTreeView.setEditable(true);
+		
+		prePane.getChildren().add(preTreeView);
+	}
 	
 	private void initializeTree() {
 		rootNode = new TreeItem<Object>(root);
@@ -333,13 +368,40 @@ public class Controller {
 				
 				cp.croyanceProperty().setValue(((Competence)newVal.getValue()).croyanceProperty().get());
 				cp.etatProperty().setValue(((Competence)newVal.getValue()).etatProperty().get());
+				
+				Map<String, Float> prerequises = new HashMap<>();
+				prerequises.put(((Competence)newVal.getValue()).nameProperty().get()+"pre1", (float) 1);				
+				prerequises.put(((Competence)newVal.getValue()).nameProperty().get()+"pre2", (float) 2);
+				cp.setPrerequises(prerequises);
 
 				treeItemSelected = newVal;
+
+				initializePreTree();
 			}
 		});
 
 	}
 	
+	private void addEventToDeleteBtn(){
+		deleteBtn.setOnAction(event -> {
+			if (treeItemSelected.getValue() instanceof Competence) {
+				//remove the competence
+				((Etudiant)treeItemSelected.getParent().getValue()).listCpsProperty().remove(treeItemSelected.getValue());
+				cpPane.visibleProperty().set(false);
+			} else if (etuSelected != null) {
+				// remove a student
+				etus.remove(treeItemSelected.getValue());
+				cpPane.visibleProperty().set(false);
+			}
+		});	
+	}
+	
+	
+	private void addEventToCreateNewPreBtn() {
+		addPreBtn.setOnAction(event -> {
+			
+		});
+	}
 	
 	private void addEventToCreateNewBtn() {
 		createNewBtn.setOnAction(event -> {
@@ -359,7 +421,7 @@ public class Controller {
 		saveBtn.setOnAction(event -> {
 			boolean dataValidated = true;
 			
-			if (cp_name == null && dataValidated == true) {
+			if (cp_name.textProperty().getValue().length() == 0 && dataValidated == true) {
 				cp_name.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_name erreur!");
 				dataValidated = false;
