@@ -31,7 +31,7 @@ public class Etudiant {
 	}
 
 	public Etudiant(EtudiantBean etuValue) throws ParseException {
-		etuName = new SimpleStringProperty(etuValue.getEtuName());
+		etuName = new SimpleStringProperty(etuValue.getName());
 		listCps = FXCollections.observableArrayList();
 		for(CompetenceBean cpValue : etuValue.getCps()) {
 			listCps.add(new Competence(cpValue));
@@ -47,6 +47,10 @@ public class Etudiant {
 	
 	public ObservableList<Competence> listCpsProperty() {
 		return listCps;
+	}
+	
+	public String getNameOfEtu() {
+		return etuName.get();
 	}
 	
 }

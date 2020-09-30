@@ -13,18 +13,18 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="828.0" prefWidth="1403.0">
                      <children>
-                        <GridPane prefHeight="830.0" prefWidth="1411.0">
+                        <GridPane fx:id="mainPane" prefHeight="830.0" prefWidth="1411.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="695.0" minWidth="10.0" prefWidth="317.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1094.0" minWidth="10.0" prefWidth="1094.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="811.0" minHeight="10.0" prefHeight="792.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="426.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="811.0" minHeight="10.0" prefHeight="711.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="426.0" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <TreeView fx:id="dataTreeView" prefHeight="200.0" prefWidth="200.0" />
-                              <GridPane GridPane.columnIndex="1">
+                              <GridPane fx:id="cpPane" GridPane.columnIndex="1">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
@@ -42,7 +42,7 @@
                                                    <children>
                                                       <GridPane layoutY="10.0" prefHeight="198.0" prefWidth="1079.0">
                                                          <children>
-                                                            <Label text="name" GridPane.columnIndex="1">
+                                                            <Label text="Name" GridPane.columnIndex="1">
                                                                <font>
                                                                   <Font size="26.0" />
                                                                </font>
@@ -52,12 +52,12 @@
                                                                   <Font size="28.0" />
                                                                </font>
                                                             </TextField>
-                                                            <Label prefHeight="35.0" prefWidth="379.0" text="created date" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                            <Label prefHeight="35.0" prefWidth="379.0" text="Created date" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                <font>
                                                                   <Font size="26.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label prefHeight="35.0" prefWidth="431.0" text="last modified date" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                            <Label prefHeight="35.0" prefWidth="431.0" text="Last modified date" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                                <font>
                                                                   <Font size="26.0" />
                                                                </font>
@@ -201,8 +201,47 @@
                                     </TitledPane>
                                  </children>
                               </GridPane>
-                              <Button fx:id="createNewBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="163.0" text="Add" GridPane.rowIndex="1" />
-                              <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="212.0" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <GridPane GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="createNewBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="163.0" text="Add">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="163.0" text="Delete" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                              <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="212.0" text="Save" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </GridPane>
                            </children>
                         </GridPane>
                      </children>
@@ -438,6 +477,149 @@
             </ScrollPane>
          </content>
       </Tab>
+      <Tab text="Fusion">
+         <content>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="865.0" prefWidth="1406.0">
+                     <children>
+                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1399.0">
+                           <children>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane prefHeight="519.0" prefWidth="1157.0">
+                                       <children>
+                                          <Label prefHeight="38.0" prefWidth="272.0" text="A" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="26.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="croyance_locale_a" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label prefHeight="35.0" prefWidth="379.0" text="non A" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="26.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="croyance_locale_n" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="croyance_locale_i" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label prefHeight="35.0" prefWidth="431.0" text="I" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="26.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="626.0" text="La fonction Fusion" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font name="Arial Black" size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="calculateFusion" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                             <font>
+                                                <Font size="26.0" />
+                                             </font>
+                                          </Button>
+                                          <Label text="Croyance locale" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="26.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Croyance propagée" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="26.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="croyance_propa_a" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="croyance_propa_n" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="croyance_propa_i" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="croyance_locale_c" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="croyance_propa_c" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label prefHeight="38.0" prefWidth="221.0" text="C" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font size="26.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="701.0" minWidth="10.0" prefWidth="83.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="874.0" minWidth="10.0" prefWidth="335.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="340.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="106.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="340.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                              <TitledPane animated="false" prefHeight="313.0" prefWidth="1514.0" text="Output" GridPane.rowIndex="1">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea fx:id="outputFusion" layoutX="51.0" layoutY="13.0" prefHeight="160.0" prefWidth="1146.0">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </TextArea>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </TitledPane>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="547.0" minHeight="10.0" prefHeight="547.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="229.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </content>
+      </Tab>
       <Tab text="Propagation">
          <content>
             <ScrollPane prefHeight="200.0" prefWidth="200.0">
@@ -581,149 +763,6 @@
                            <rowConstraints>
                               <RowConstraints maxHeight="547.0" minHeight="10.0" prefHeight="529.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="331.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
-         </content>
-      </Tab>
-      <Tab text="Fusion">
-         <content>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="865.0" prefWidth="1406.0">
-                     <children>
-                        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1399.0">
-                           <children>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <GridPane prefHeight="519.0" prefWidth="1157.0">
-                                       <children>
-                                          <Label prefHeight="38.0" prefWidth="272.0" text="A" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="26.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="croyance_locale_a" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextField>
-                                          <Label prefHeight="35.0" prefWidth="379.0" text="non A" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="26.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="croyance_locale_n" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextField>
-                                          <TextField fx:id="croyance_locale_i" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextField>
-                                          <Label prefHeight="35.0" prefWidth="431.0" text="I" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="26.0" />
-                                             </font>
-                                          </Label>
-                                          <Label prefHeight="35.0" prefWidth="626.0" text="La fonction Fusion" GridPane.columnIndex="1">
-                                             <font>
-                                                <Font name="Arial Black" size="30.0" />
-                                             </font>
-                                          </Label>
-                                          <Button fx:id="calculateFusion" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="26.0" />
-                                             </font>
-                                          </Button>
-                                          <Label text="Croyance locale" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="26.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Croyance propagée" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="26.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="croyance_propa_a" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextField>
-                                          <TextField fx:id="croyance_propa_n" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextField>
-                                          <TextField fx:id="croyance_propa_i" GridPane.columnIndex="4" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextField>
-                                          <TextField fx:id="croyance_locale_c" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextField>
-                                          <TextField fx:id="croyance_propa_c" GridPane.columnIndex="4" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextField>
-                                          <Label prefHeight="38.0" prefWidth="221.0" text="C" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="26.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="701.0" minWidth="10.0" prefWidth="83.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="874.0" minWidth="10.0" prefWidth="335.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="340.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="106.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="340.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="130.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                    </GridPane>
-                                 </children>
-                              </AnchorPane>
-                              <TitledPane animated="false" prefHeight="313.0" prefWidth="1514.0" text="Output" GridPane.rowIndex="1">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <TextArea fx:id="outputFusion" layoutX="51.0" layoutY="13.0" prefHeight="160.0" prefWidth="1146.0">
-                                             <font>
-                                                <Font size="28.0" />
-                                             </font>
-                                          </TextArea>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </TitledPane>
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="547.0" minHeight="10.0" prefHeight="547.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="229.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
                      </children>

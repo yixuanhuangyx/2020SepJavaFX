@@ -21,8 +21,16 @@ public class CompetenceBean {
 	Map<Integer, Float> prerequises;	// <id, distance> 
 	
 
-	
-	//getters and setters
+	public CompetenceBean() {
+		name = "";
+		createdDate = "";
+		lastModifiedDate = "";
+		noteEvaluation = "";
+		x = "";
+		r = "";
+		croyance = "";
+		etat = "";
+	}
 	
 	public CompetenceBean(Competence g) {
 		name = g.nameProperty().getValue();
@@ -41,123 +49,80 @@ public class CompetenceBean {
 		return id;
 	}
 
-
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 
 	public String getName() {
 		return name;
 	}
 
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
 
 	public String getCreatedDate() {
 		return createdDate;
 	}
 
-
-
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
-
-
 
 	public String getLastModifiedDate() {
 		return lastModifiedDate;
 	}
 
-
-
 	public void setLastModifiedDate(String lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
-
-
 
 	public String getNoteEvaluation() {
 		return noteEvaluation;
 	}
 
-
-
 	public void setNoteEvaluation(String noteEvaluation) {
 		this.noteEvaluation = noteEvaluation;
 	}
-
-
 
 	public String getX() {
 		return x;
 	}
 
-
-
 	public void setX(String x) {
 		this.x = x;
 	}
-
-
 
 	public String getR() {
 		return r;
 	}
 
-
-
 	public void setR(String r) {
 		this.r = r;
 	}
-
-
 
 	public String getCroyance() {
 		return croyance;
 	}
 
-
-
 	public void setCroyance(String croyance) {
 		this.croyance = croyance;
 	}
-
-
 
 	public String getEtat() {
 		return etat;
 	}
 
-
-
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
-
-
 
 	public Map<Integer, Float> getPrerequises() {
 		return prerequises;
 	}
 
-
-
 	public void setPrerequises(Map<Integer, Float> prerequises) {
 		this.prerequises = prerequises;
 	}
 	
-	
-	
-
-	
-
 }

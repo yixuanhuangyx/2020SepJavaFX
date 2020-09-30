@@ -131,6 +131,17 @@ public class Competence {
 //		Map<Integer, Float> prerequises;	
 	}
 	
-	
+	public void editCp(Competence newCp) {
+
+		this.name.setValue(newCp.nameProperty().getValue());
+		this.createdDate.setValue(newCp.createdDateProperty().getValue());
+		this.lastModifiedDate.setValue(newCp.lastModifiedDateProperty().getValue());
+		this.noteEvaluation.setValue(newCp.noteEvaluationProperty().getValue());
+		this.x.setValue(newCp.xProperty().getValue());
+		this.r.setValue(newCp.rProperty().getValue());
+
+		this.croyance.setValue(newCp.croyanceProperty().getValue());
+		this.etat.setValue(newCp.etatProperty().getValue());
+	}
 	
 }

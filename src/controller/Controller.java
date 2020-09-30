@@ -5,19 +5,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import model.Competence;
 import model.CompetenceBean;
 import model.Croyance;
 import model.DataTreeViewRoot;
+import model.Etudiant;
+import model.EtudiantBean;
 import model.Workspace;
 
 public class Controller {
@@ -101,8 +109,10 @@ public class Controller {
 	
 	
 
-	
-	
+	@FXML
+	private GridPane mainPane;
+	@FXML
+	private GridPane cpPane;
 	@FXML 
 	private TextField cp_name;
 	@FXML 
@@ -137,7 +147,7 @@ public class Controller {
 	private Etudiant etuSelected = null;
 	private Competence cp;
 	
-	private ObservableList<Competence> etus = FXCollections.observableArrayList();
+	private ObservableList<Etudiant> etus = FXCollections.observableArrayList();
 
 	private TreeItem<Object> treeItemSelected = new TreeItem<Object>();
 	private TreeItem<Object> rootNode;
@@ -164,9 +174,6 @@ public class Controller {
 		cp_x.textProperty().bindBidirectional(cp.xProperty());
 		cp_r.textProperty().bindBidirectional(cp.rProperty());
 	
-		
-//		loadData();
-		
 
 //		sexGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
 //			if (sexGroup.getSelectedToggle() != null) {
@@ -197,6 +204,7 @@ public class Controller {
 
 		addEventToCreateNewBtn();
 		addEventToSaveBtn();
+		// addEventToDeleteBtn();
 		
 		
 		//-- addEventToMenuBar()
@@ -211,41 +219,110 @@ public class Controller {
 //		@FXML
 //		private MenuItem loadMenuItem;
 	
-	
+		loadData();
 	}
 	
 	private void loadData() {
 		try {
-			cps.clear();
-			System.out.println("load cps size-- "+cps.size());
+			etus.clear();
+			System.out.println("load etus size-- "+etus.size());
 
-			ArrayList<CompetenceBean> cpsValue = workspace.fromFile(file);
-			System.out.println("load cpsValueSize-- "+cpsValue.size());
+			ArrayList<EtudiantBean> etusValue = workspace.fromFile(file);
+			System.out.println("load etusValue size-- "+etusValue.size());
 			
-			for(CompetenceBean cp : cpsValue) {
-				cps.add(new Competence(cp));
+			for(EtudiantBean etu : etusValue) {
+				etus.add(new Etudiant(etu));
 			}
-			System.out.println("load cps size-- "+cps.size());
+			System.out.println("load etus size-- "+etus.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 initializeTree();
-		 // TODO: add listener
+	
+		initializeTree();
+		addListnerToEtus();
 	}
+
+	private void addListnerToEtus() {
+		ListChangeListener<Object> h;
+		h = change ->{
+			change.next();
+			if (change.wasRemoved()) {
+				//remove from treeview
+				TreeItem<Object> parentEtudiant = treeItemSelected.getParent();
+				parentEtudiant.getChildren().remove(treeItemSelected);
+			}
+			if (change.wasAdded()) {
+				change.getAddedSubList().forEach(item -> {
+					TreeItem<Object> cpLeaf = new TreeItem<Object>(item);
+					treeItemSelected.getChildren().add(cpLeaf);
+				});
+			}
+		};
+		
+		
+		ListChangeListener<Object> f;
+		f = change -> {
+			change.next();
+			if (change.wasRemoved()) {
+				rootNode.getChildren().remove(treeItemSelected);
+			}
+			if (change.wasAdded()) {
+				change.getAddedSubList().forEach(item -> {
+					TreeItem<Object> etuLeaf = new TreeItem<Object>(item);
+					rootNode.getChildren().add(etuLeaf);
+					((Etudiant)item).listCpsProperty().addListener(h);
+				});
+			}
+		};
+		
+		for(Etudiant etu: etus) {
+			etu.listCpsProperty().addListener(h);
+		}
+		etus.addListener(f);
+	}
+
 	
 	private void initializeTree() {
 		rootNode = new TreeItem<Object>(root);
 		rootNode.setExpanded(true);
 		
-		for (Competence cp : cps) {
-			TreeItem<Object> cpLeaf = new TreeItem<Object>(cp);
-			rootNode.getChildren().add(cpLeaf);
+		for(Etudiant etu: etus) {
+			TreeItem<Object> etuNode = new TreeItem<Object>(etu);
+			for (Competence cp : etu.listCpsProperty()) {
+				TreeItem<Object> cpLeaf = new TreeItem<Object>(cp);
+				etuNode.getChildren().add(cpLeaf);
+			}
+			rootNode.getChildren().add(etuNode);
 		}
 		
+//		TreeView<Object> 
 		dataTreeView = new TreeView<Object>(rootNode);
+		dataTreeView.setEditable(true);
+		dataTreeView.setCellFactory(param -> new TextFieldTreeCellImpl());
+
+		mainPane.getChildren().add(dataTreeView);
 
 		dataTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldVal, newVal) -> {
-			if(newVal.getValue() instanceof Competence) {
+			if(newVal.getValue() instanceof DataTreeViewRoot) {
+				etuSelected = null;
+				
+				root.racineSelectedProperty().set(true);
+				cpPane.visibleProperty().set(false);
+				
+				newVal.setExpanded(true);
+			}else if(newVal.getValue() instanceof Etudiant) {
+				etuSelected = (Etudiant) newVal.getValue();
+				
+				root.racineSelectedProperty().set(false);
+				cpPane.visibleProperty().set(false);
+				
+				treeItemSelected = newVal;
+			}else if(newVal.getValue() instanceof Competence) {
+				etuSelected = null;
+				
+				root.racineSelectedProperty().set(false);
+				cpPane.visibleProperty().set(true);
+				
 				cp.nameProperty().setValue(((Competence)newVal.getValue()).nameProperty().get());
 				cp.createdDateProperty().setValue(((Competence)newVal.getValue()).createdDateProperty().get());
 				cp.lastModifiedDateProperty().setValue(((Competence)newVal.getValue()).lastModifiedDateProperty().get());
@@ -257,6 +334,7 @@ public class Controller {
 				cp.croyanceProperty().setValue(((Competence)newVal.getValue()).croyanceProperty().get());
 				cp.etatProperty().setValue(((Competence)newVal.getValue()).etatProperty().get());
 
+				treeItemSelected = newVal;
 			}
 		});
 
@@ -265,7 +343,14 @@ public class Controller {
 	
 	private void addEventToCreateNewBtn() {
 		createNewBtn.setOnAction(event -> {
-			cp.videCompetence();
+			if(root.racineSelectedProperty().getValue()) {
+				cpPane.visibleProperty().set(false);
+				Etudiant newEtu = new Etudiant();
+				etus.add(newEtu);
+			}else if(etuSelected != null) {
+				cpPane.visibleProperty().set(true);
+				cp.videCompetence();
+			}
 		});
 	}
 	
@@ -274,7 +359,7 @@ public class Controller {
 		saveBtn.setOnAction(event -> {
 			boolean dataValidated = true;
 			
-			if (cp_name ==null && dataValidated == true) {
+			if (cp_name == null && dataValidated == true) {
 				cp_name.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_name erreur!");
 				dataValidated = false;
@@ -283,7 +368,7 @@ public class Controller {
 			}
 
 			// TODO: more check on cretaed date 
-			if (cp_createdDate ==null && dataValidated == true) {
+			if (cp_createdDate == null && dataValidated == true) {
 				cp_createdDate.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_createdDate erreur!");
 				dataValidated = false;
@@ -291,7 +376,7 @@ public class Controller {
 				cp_createdDate.setStyle("-fx-border-color: black ;"); 
 			}
 			
-			if (cp_modifiedDate ==null && dataValidated == true) {
+			if (cp_modifiedDate == null && dataValidated == true) {
 				cp_modifiedDate.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_modifiedDate erreur!");
 				dataValidated = false;
@@ -300,7 +385,7 @@ public class Controller {
 			}
 
 			// TODO: more check input value on croyance
-			if (cp_croyance ==null && dataValidated == true) {
+			if (cp_croyance == null && dataValidated == true) {
 				cp_croyance.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_croyance erreur!");
 				dataValidated = false;
@@ -310,7 +395,7 @@ public class Controller {
 
 			
 			//check if input is number
-			if (cp_note ==null && dataValidated == true) {
+			if (cp_note == null && dataValidated == true) {
 				cp_note.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_note erreur!");
 				dataValidated = false;
@@ -319,7 +404,7 @@ public class Controller {
 			}
 			
 			//check if input is number
-			if (cp_x ==null && dataValidated == true) {
+			if (cp_x == null && dataValidated == true) {
 				cp_x.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_x erreur!");
 				dataValidated = false;
@@ -328,7 +413,7 @@ public class Controller {
 			}
 			
 			//check if input is number
-			if (cp_r ==null && dataValidated == true) {
+			if (cp_r == null && dataValidated == true) {
 				cp_r.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_r erreur!");
 				dataValidated = false;
@@ -337,7 +422,7 @@ public class Controller {
 			}
 
 
-			if (cp_etat ==null && dataValidated == true) {
+			if (cp_etat == null && dataValidated == true) {
 				cp_etat.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_etat erreur!");
 				dataValidated = false;
@@ -346,18 +431,26 @@ public class Controller {
 			}
 			
 			
-			if(dataValidated) {
+			if(etuSelected != null && dataValidated == true) {
 				Competence newCp = addCompetence();
-				root.listCPsProperty().add(newCp);
-
+				etuSelected.listCpsProperty().add(newCp);
 				try {
-					workspace.setData(cps);
+					workspace.setData(etus);
 					workspace.save(file);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}	
-			}	
+			}else if(etuSelected == null && dataValidated == true) {
+				Competence newCp = addCompetence();
+				((Competence)treeItemSelected.getValue()).editCp(newCp);
+				try {
+					workspace.setData(etus);
+					workspace.save(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}	
+			}
+			
 		});
 		
 		
@@ -459,5 +552,88 @@ public class Controller {
 		});
 	}
 	
+	
+
+	private final class TextFieldTreeCellImpl extends TreeCell<Object> {
+
+		private TextField textField;
+
+		public TextFieldTreeCellImpl() {
+		}
+
+		@Override
+		public void startEdit() {
+			// we could only edit etudiant in treeview
+			if (!(getTreeItem().getValue() instanceof Etudiant)) {
+				return;
+			}
+
+			super.startEdit();
+			if (textField == null) {
+				createTextField();
+			}
+
+			System.out.println("startEdit");
+			setText(null);
+			setGraphic(textField);
+			textField.selectAll();
+		}
+
+		@Override
+		public void cancelEdit() {
+			super.cancelEdit();
+			System.out.println("cancelEdit");
+			setText(((Etudiant) getItem()).getNameOfEtu());
+			setGraphic(getTreeItem().getGraphic());
+		}
+
+		@Override
+		public void updateItem(Object item, boolean empty) {
+			super.updateItem(item, empty);
+			if (empty) {
+				setText(null);
+				setGraphic(null);
+			} else {
+				if (isEditing()) {
+					if (textField != null) {
+						textField.setText(getString());
+					}
+					setText(null);
+					setGraphic(textField);
+				} else {
+					setText(getString());
+					setGraphic(getTreeItem().getGraphic());
+				}
+			}
+		}
+
+		private void createTextField() {
+
+			System.out.println("createTextField");
+			textField = new TextField(getString());
+			textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+				@Override
+				public void handle(KeyEvent t) {
+					if (t.getCode() == KeyCode.ENTER) {
+						((Etudiant) getTreeItem().getValue()).etuNameProperty().set(textField.getText());
+						commitEdit(((Etudiant) getTreeItem().getValue())); 
+					} else if (t.getCode() == KeyCode.ESCAPE) {
+						cancelEdit();
+					}
+				}
+			});
+		}
+
+		private String getString() {
+			if (getItem() instanceof Etudiant) {
+				return getItem() == null ? "" : ((Etudiant) getItem()).getNameOfEtu();
+			} else if (getItem() instanceof DataTreeViewRoot) {
+				return getItem() == null ? "" : ((DataTreeViewRoot) getItem()).getTitre();
+			} else {
+				return getItem() == null ? "" : ((Competence) getItem()).nameProperty().getValue();
+			}
+		}
+	}
 	
 }
