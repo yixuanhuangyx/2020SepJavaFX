@@ -229,7 +229,6 @@
                                                                </children>
                                                             </GridPane>
                                                             <TreeView fx:id="cp_prerequises" prefHeight="153.0" prefWidth="460.0" />
-                                                            <TextField fx:id="cp_pre_value" disable="true" visible="false" />
                                                          </children>
                                                       </GridPane>
                                                    </children>
