@@ -411,7 +411,8 @@ public class Controller {
 				cpPane.visibleProperty().set(true);
 				
 				cp.nameProperty().setValue(((Competence)newVal.getValue()).nameProperty().get());
-				cp.createdDateProperty().setValue(((Competence)newVal.getValue()).createdDateProperty().get());
+				LocalDate date = ((Competence)newVal.getValue()).createdDateProperty().get();
+				cp.createdDateProperty().setValue(date);
 				cp.lastModifiedDateProperty().setValue(((Competence)newVal.getValue()).lastModifiedDateProperty().get());
 				
 				cp.noteEvaluationProperty().setValue(((Competence)newVal.getValue()).noteEvaluationProperty().get());
