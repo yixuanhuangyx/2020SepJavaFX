@@ -188,17 +188,6 @@ public class Controller {
 		cpPane.visibleProperty().setValue(false);
 		
 		initializeCp();
-	
-			
-//		cp_pre_value.textProperty().bindBidirectional(cp.listPresProperty());
-//		sexGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
-//			if (sexGroup.getSelectedToggle() != null) {
-//				contact.sexProperty().setValue(((RadioButton) sexGroup.getSelectedToggle()).getText());
-//			}
-//		});
-//		contact.birthdayProperty().setValue(now);
-//		contactPane.visibleProperty().set(false);
-		
 
 
 		// force the field to be numeric only
@@ -217,7 +206,6 @@ public class Controller {
 		addEventToFusionBtn();
 		addEventToPropagationBtn();
 		
-
 		addEventToCreateNewBtn();
 		addEventToSaveBtn();
 		addEventToDeleteBtn();
@@ -226,8 +214,6 @@ public class Controller {
 		addEventToDeletePreBtn();
 		
 		//-- addEventToMenuBar()
-		//save menu btn 
-		//load menu btn
 //		@FXML 
 //		private MenuBar myMenuBar;
 //		@FXML
@@ -333,11 +319,6 @@ public class Controller {
 		TreeItem<Object> preTreeItem = new TreeItem<Object>("Prerequises format:\"Name:Distance\"");
 		preTreeItem.setExpanded(true);
 		
-//		for (Prerequise pre : cp.listPresProperty()) {
-//			TreeItem<Object> preLeaf = new TreeItem<Object>(pre);
-//			preTreeItem.getChildren().add(preLeaf);
-//		}
-		
 		if(cp.getPrerequises()!=null) {
 	        for (Entry<String, String> entry : cp.getPrerequises().entrySet())  {
 	            Prerequise preObj = new Prerequise(entry.getKey(),entry.getValue());
@@ -346,15 +327,6 @@ public class Controller {
 	        }
 		}
 
-//		Map<String, Float> presMap = cp.getPrerequises();
-//		if(presMap != null) {
-//			for (Map.Entry<String,Float> entry : presMap.entrySet()) {
-//				TreeItem<Object> preLeaf = new TreeItem<Object>("Competence Name : "+entry.getKey());
-//				TreeItem<Object> preDistanceLeaf = new TreeItem<Object>("Distance : "+entry.getValue());
-//				preLeaf.getChildren().add(preDistanceLeaf);
-//				preTreeItem.getChildren().add(preLeaf);
-//			}
-//		}
 		TreeView<Object> preTreeView = new TreeView<Object>(preTreeItem);
 		preTreeView.setEditable(true);
 		preTreeView.setCellFactory(param -> new preTreeCellImpl());
@@ -431,11 +403,6 @@ public class Controller {
 				cp.croyanceProperty().setValue(((Competence)newVal.getValue()).croyanceProperty().get());
 				cp.etatProperty().setValue(((Competence)newVal.getValue()).etatProperty().get());
 				
-//				test/debug:
-//				Map<String, Float> prerequises = new HashMap<>();
-//				prerequises.put(((Competence)newVal.getValue()).nameProperty().get()+"pre1", (float) 1);				
-//				prerequises.put(((Competence)newVal.getValue()).nameProperty().get()+"pre2", (float) 2);
-//				cp.setPrerequises(prerequises);
 				Map<String,String> value = ((Competence)newVal.getValue()).getPrerequises();
 				cp.setPrerequises(value);
 				
@@ -468,7 +435,6 @@ public class Controller {
 			Prerequise pre = new Prerequise("Unknown","Unknown");
 			
 			Map<String,String> preMap = cp.getPrerequises();
-//			Float distance = (pre.getDistance().equals("Unknown")? 0.0f : pre.getDistance());
 			preMap.put(
 					pre.getName(),
 					pre.getDistance()
@@ -514,7 +480,6 @@ public class Controller {
 				cp_name.setStyle("-fx-border-color: black ;"); 
 			}
 
-			// TODO: more check on cretaed date 
 			if (cp_createdDate == null && dataValidated == true) {
 				cp_createdDate.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_createdDate erreur!");
@@ -531,7 +496,6 @@ public class Controller {
 				cp_modifiedDate.setStyle("-fx-border-color: black ;"); 
 			}
 
-			// TODO: more check input value on croyance
 			if (cp_croyance == null && dataValidated == true) {
 				cp_croyance.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_croyance erreur!");
@@ -540,8 +504,6 @@ public class Controller {
 				cp_croyance.setStyle("-fx-border-color: black ;"); 
 			}
 
-			
-			//check if input is number
 			if (cp_note == null && dataValidated == true) {
 				cp_note.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_note erreur!");
@@ -550,7 +512,6 @@ public class Controller {
 				cp_note.setStyle("-fx-border-color: black ;"); 
 			}
 			
-			//check if input is number
 			if (cp_x == null && dataValidated == true) {
 				cp_x.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_x erreur!");
@@ -559,7 +520,6 @@ public class Controller {
 				cp_x.setStyle("-fx-border-color: black ;"); 
 			}
 			
-			//check if input is number
 			if (cp_r == null && dataValidated == true) {
 				cp_r.setStyle("-fx-border-color: red ;");
 				System.out.println("cp_r erreur!");
@@ -576,7 +536,6 @@ public class Controller {
 			} else {
 				cp_etat.setStyle("-fx-border-color: black ;"); 
 			}
-			
 			
 			if(etuSelected != null && dataValidated == true) {
 				Competence newCp = addCompetence();
@@ -615,7 +574,6 @@ public class Controller {
 		String croyance = cp_croyance.getText();
 		String etat = cp_etat.getText();
 		
-//		List<Prerequise> listPre = cp.listPresProperty().stream().collect(Collectors.toList());
 		
 		List<Prerequise> listPreRes = new ArrayList<>();
 		if(cp.getPrerequises()!=null) {
@@ -869,7 +827,7 @@ public class Controller {
 		private String getString() {
 			if (getItem() instanceof Prerequise) {
 				return getItem() == null ? "" : ((Prerequise) getItem()).toListOutputString();
-			} else {//(getItem() instanceof String) 
+			} else {
 				return getItem() == null ? "" : (String) getItem();
 			} 
 		}

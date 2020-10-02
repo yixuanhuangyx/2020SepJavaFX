@@ -17,8 +17,8 @@ public class CompetenceBean {
 	String noteEvaluation;
 	String x;
 	String r;
-	//	Croyance croyance; // TODO: toJsonObject
-	String croyance; // TODO: toJsonObject
+	//	Croyance croyance; 
+	String croyance;
 	//	etatEnum etat;
 	String etat;
 	

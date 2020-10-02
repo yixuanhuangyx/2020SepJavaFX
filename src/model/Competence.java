@@ -29,7 +29,7 @@ public class Competence {
 	StringProperty x;
 	StringProperty r;
 	
-	StringProperty croyance; // TODO: toJsonObject / get separed field
+	StringProperty croyance; 
 	StringProperty etat;
 	
 	
@@ -189,7 +189,6 @@ public class Competence {
 		this.etat.setValue("");
 
 		this.prerequises = new HashMap<>();	
-//		Map<Integer, Float> prerequises;	
 	}
 	
 	public void editCp(Competence newCp) {
