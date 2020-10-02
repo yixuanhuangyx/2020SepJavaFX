@@ -28,27 +28,7 @@ public class Revision {
 	 * Sinon proc¨¦dure 2: la moyenne de les deux croyances
 	 * */
 	public static boolean sameEtat(Croyance cry1, Croyance cry2) {
-		return getEtat(cry1)==getEtat(cry2);
+		return Utils.getEtat(cry1) == Utils.getEtat(cry2);
 	}
-	
-	
-	/*
-	 * m(a) > 0 et m(n) =0    ¨¦tat acquise 
-	 * m(a)= 0 et  m(n) > 0   ¨¦tat non acquise
-	 * m(a)> 0 et m(i)> 0 ¨¦tat probablement acquise 
-	 * m(n)> 0 et m(i)> 0 ¨¦tat probablement non acquise 
-	 * */
-	private static etatEnum getEtat(Croyance cry) {
-		if(cry.getA() > 0 && cry.getN() == 0) {
-			return etatEnum.acquise;
-		} else if(cry.getA() == 0 && cry.getN() > 0) {
-			return etatEnum.nonAcquise;
-		} else if(cry.getA() > 0 && cry.getI() > 0) {
-			return etatEnum.probablementAcquise;
-		} else if(cry.getN() > 0 && cry.getI() > 0) {
-			return etatEnum.probablementNonAcquise;
-		}else 
-			return etatEnum.undefined;
-	}
-	
+
 }
