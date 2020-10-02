@@ -148,6 +148,8 @@ public class Controller {
 	@FXML
 	private Button addPreBtn;
 	@FXML
+	private Button deletePreBtn;
+	@FXML
 	private Label preNumberLabel;
 	 
 	private TreeItem<Object> prerequises;
@@ -221,6 +223,7 @@ public class Controller {
 		addEventToDeleteBtn();
 		
 		addEventToCreateNewPreBtn();
+		addEventToDeletePreBtn();
 		
 		//-- addEventToMenuBar()
 		//save menu btn 
@@ -327,7 +330,7 @@ public class Controller {
 	}
 
 	private void initializePreTree() {
-		TreeItem<Object> preTreeItem = new TreeItem<Object>("Prerequises");
+		TreeItem<Object> preTreeItem = new TreeItem<Object>("Prerequises format:\"Name:Distance\"");
 		preTreeItem.setExpanded(true);
 		
 //		for (Prerequise pre : cp.listPresProperty()) {
@@ -357,10 +360,15 @@ public class Controller {
 		preTreeView.setCellFactory(param -> new preTreeCellImpl());
 		prePane.getChildren().add(preTreeView);
 		
-//		if(presMap != null)
-//			preNumberLabel.setText("Total(n) : "+presMap.size());
-//		else 
-//			preNumberLabel.setText("Total(n) : 0");
+
+		preTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldVal, newVal) -> {
+				preSelected = newVal;
+//				Prerequise preSelected = (Etudiant) newVal.getValue();
+//				newVal.setExpanded(true);
+		});
+		
+		
+		
 		if(cp.getPrerequises()==null) {
 			preNumberLabel.setText("Total(n) : 0");
 		}else {
@@ -458,7 +466,7 @@ public class Controller {
 	private void addEventToCreateNewPreBtn() {
 		addPreBtn.setOnAction(event -> {
 			Prerequise pre = new Prerequise("Unknown","Unknown");
-//			cp.listPresProperty().add(pre);
+			
 			Map<String,String> preMap = cp.getPrerequises();
 //			Float distance = (pre.getDistance().equals("Unknown")? 0.0f : pre.getDistance());
 			preMap.put(
@@ -466,14 +474,19 @@ public class Controller {
 					pre.getDistance()
 			);
 			cp.setPrerequises(preMap);
-			initializePreTree();
-			//
-			//
-			//
-			//
 			
+			initializePreTree();
 		});
 	}
+	
+	private void addEventToDeletePreBtn(){
+		deletePreBtn.setOnAction(event -> {
+			Prerequise test = (Prerequise) preSelected.getValue();
+			cp.removePre(test);
+
+			initializePreTree();
+		});
+	}	
 	
 	private void addEventToCreateNewBtn() {
 		createNewBtn.setOnAction(event -> {

@@ -211,7 +211,7 @@
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                               </rowConstraints>
                                                                <children>
-                                                                  <Button fx:id="addPreBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="212.0" text="Add Prerequise">
+                                                                  <Button fx:id="addPreBtn" mnemonicParsing="false" prefHeight="56.0" prefWidth="241.0" text="Add Prerequise">
                                                                      <font>
                                                                         <Font size="26.0" />
                                                                      </font>
@@ -221,11 +221,11 @@
                                                                         <Font size="26.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <Label prefHeight="35.0" prefWidth="431.0" text="Name:Distance" GridPane.rowIndex="1">
+                                                                  <Button fx:id="deletePreBtn" mnemonicParsing="false" prefHeight="56.0" prefWidth="242.0" text="Delete Prerequise" GridPane.rowIndex="1">
                                                                      <font>
                                                                         <Font size="26.0" />
                                                                      </font>
-                                                                  </Label>
+                                                                  </Button>
                                                                </children>
                                                             </GridPane>
                                                             <TreeView fx:id="cp_prerequises" prefHeight="153.0" prefWidth="460.0" />

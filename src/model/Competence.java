@@ -212,5 +212,9 @@ public class Competence {
 	        }
 		}
 	}
+
+	public void removePre(Prerequise pre) {
+		this.prerequises.remove(pre.getName());
+	}
 	
 }
