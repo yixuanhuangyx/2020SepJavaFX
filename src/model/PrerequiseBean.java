@@ -19,6 +19,11 @@ public class PrerequiseBean {
 		distance = pre.distanceProperty().getValue();
 	}
 
+	public PrerequiseBean(String key, String value) {
+		this.name = key;
+		this.distance = value;
+	}
+
 	public String getName() {
 		return name;
 	}

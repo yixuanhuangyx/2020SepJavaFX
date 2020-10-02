@@ -146,8 +146,6 @@ public class Controller {
 	private TreeView<Object> cp_prerequises;
 	//private ListView<Object> cp_prerequises;
 	@FXML
-	private TextField cp_pre_value;
-	@FXML
 	private Button addPreBtn;
 	@FXML
 	private Label preNumberLabel;
@@ -320,9 +318,9 @@ public class Controller {
 		};
 		
 		for(Etudiant etu: etus) {
-			for(Competence cp: etu.listCpsProperty()) {
-				cp.listPresProperty().addListener(k);
-			}
+//			for(Competence cp: etu.listCpsProperty()) {
+//				cp.listPresProperty().addListener(k);
+//			}
 			etu.listCpsProperty().addListener(h);
 		}
 		etus.addListener(f);

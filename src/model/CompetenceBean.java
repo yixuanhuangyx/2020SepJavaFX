@@ -2,8 +2,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import controller.Utils;
+import javafx.scene.control.TreeItem;
 
 public class CompetenceBean {
 	Integer id;
@@ -19,8 +21,8 @@ public class CompetenceBean {
 	//	etatEnum etat;
 	String etat;
 	
-	Map<Integer, Float> prerequises;	// <id, distance> 
-	ArrayList<PrerequiseBean> pres = new ArrayList<PrerequiseBean>();
+	Map<String, String> prerequises;	// <id, distance> 
+//	ArrayList<PrerequiseBean> pres = new ArrayList<PrerequiseBean>();
 
 
 
@@ -46,18 +48,26 @@ public class CompetenceBean {
 		etat = g.etatProperty().getValue();
 		
 		for(Prerequise pre: g.listPresProperty()) {
-			this.pres.add(new PrerequiseBean(pre));
+			this.prerequises.put(pre.getName(), pre.getDistance());
+//			this.pres.add(new PrerequiseBean(pre));
 		}
 	}
 
 
 	public ArrayList<PrerequiseBean> getPres() {
-		return pres;
+		ArrayList<PrerequiseBean> res = new ArrayList<PrerequiseBean>();
+		if(this.prerequises!=null) {
+	        for (Entry<String, String> entry : this.prerequises.entrySet())  {
+	            PrerequiseBean preBean = new PrerequiseBean(entry.getKey(),entry.getValue());
+				res.add(preBean);
+	        }
+		}
+		return res;
 	}
 
-	public void setPres(ArrayList<PrerequiseBean> pres) {
-		this.pres = pres;
-	}
+//	public void setPres(ArrayList<PrerequiseBean> pres) {
+//		this.pres = pres;
+//	}
 	
 	public Integer getId() {
 		return id;
@@ -131,12 +141,9 @@ public class CompetenceBean {
 		this.etat = etat;
 	}
 
-	public Map<Integer, Float> getPrerequises() {
+	public Map<String, String> getPrerequises() {
 		return prerequises;
 	}
 
-	public void setPrerequises(Map<Integer, Float> prerequises) {
-		this.prerequises = prerequises;
-	}
 	
 }

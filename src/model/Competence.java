@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,13 +39,19 @@ public class Competence {
 	
 	
 	Map<String, String> prerequises = new HashMap<>();	// <name, distance> 
-	ObservableList<Prerequise> listPres;
+//	ObservableList<Prerequise> listPres;
 	
 	
 	
 	
-	public ObservableList<Prerequise> listPresProperty() {
-		return listPres;
+	public List<Prerequise> listPresProperty() {
+		List<Prerequise> res = new ArrayList<>();
+		if(this.prerequises!=null) {
+	        for (Entry<String, String> entry : this.prerequises.entrySet())  {
+	            res.add(new Prerequise (entry.getKey(),entry.getValue()));
+	        }
+		}
+		return res;
 	}
 	
 	public Map<String, String> getPrerequises() {
@@ -77,7 +84,8 @@ public class Competence {
 		this.croyance = new SimpleStringProperty();
 		this.etat = new SimpleStringProperty();
 		
-		this.listPres = FXCollections.observableArrayList(new ArrayList<Prerequise>());
+		this.prerequises = new HashMap<>();
+//		this.listPres = FXCollections.observableArrayList(new ArrayList<Prerequise>());
 	}
 	
 	public Competence(
@@ -100,7 +108,12 @@ public class Competence {
 		this.croyance = new SimpleStringProperty(croyance);
 		this.etat = new SimpleStringProperty(etat);
 		
-		this.listPres = FXCollections.observableArrayList(listPres);
+		this.prerequises = new HashMap<>();
+		for (Iterator<Prerequise> iter =  listPres.iterator(); iter.hasNext();){
+			Prerequise element = (Prerequise) iter.next();
+			this.prerequises.put(element.getName(),element.getDistance());	             
+		}
+//		this.listPres = FXCollections.observableArrayList(listPres);
 	}
 	
 	public Competence(CompetenceBean cp) throws ParseException {
@@ -121,10 +134,17 @@ public class Competence {
 		this.croyance = new SimpleStringProperty(cp.getCroyance());
 		this.etat = new SimpleStringProperty(cp.getEtat());
 		
-		this.listPres = FXCollections.observableArrayList();
-		for(PrerequiseBean preValue: cp.getPres()) {
-			listPres.add(new Prerequise(preValue));
+
+		this.prerequises = new HashMap<>();
+		if(cp.getPrerequises()!=null) {
+	        for (Entry<String, String> entry : cp.getPrerequises().entrySet())  {
+	            this.prerequises.put(entry.getKey(),entry.getValue());
+	        }
 		}
+//		this.listPres = FXCollections.observableArrayList();
+//		for(PrerequiseBean preValue: cp.getPres()) {
+//			listPres.add(new Prerequise(preValue));
+//		}
 	}
 	
 	public StringProperty nameProperty() {
