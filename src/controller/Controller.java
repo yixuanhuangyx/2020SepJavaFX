@@ -598,7 +598,7 @@ public class Controller {
 				Utils.checkInput(r, outputTransformation) 			
 			) {
 				Croyance res = Transformation.fonctionsTransformation(Utils.getNumber(note),Utils.getNumber(x),Utils.getNumber(r));
-				outputTransformation.setText(res.toString());
+				outputTransformation.setText(res.toString() +"\n"+"Etat Competence:"+ Utils.getEtat(res) );
 			}
 		});
 	}

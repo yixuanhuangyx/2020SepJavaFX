@@ -7,6 +7,8 @@ import java.util.Calendar;
 
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.Croyance;
+import model.etatEnum;
 
 public class Utils {
 	
@@ -48,4 +50,25 @@ public class Utils {
 	    LocalDate localDate = LocalDate.parse(date , formatter);
 	    return localDate;
 	}
+	
+	
+	/*
+	 * m(a) > 0 et m(n) =0    ¨¦tat acquise 
+	 * m(a)= 0 et  m(n) > 0   ¨¦tat non acquise
+	 * m(a)> 0 et m(i)> 0 ¨¦tat probablement acquise 
+	 * m(n)> 0 et m(i)> 0 ¨¦tat probablement non acquise 
+	 * */
+	public static etatEnum getEtat(Croyance cry) {
+		if(cry.getA() > 0 && cry.getN() == 0) {
+			return etatEnum.acquise;
+		} else if(cry.getA() == 0 && cry.getN() > 0) {
+			return etatEnum.nonAcquise;
+		} else if(cry.getA() > 0 && cry.getI() > 0) {
+			return etatEnum.probablementAcquise;
+		} else if(cry.getN() > 0 && cry.getI() > 0) {
+			return etatEnum.probablementNonAcquise;
+		}else 
+			return etatEnum.undefined;
+	}
+	
 }
