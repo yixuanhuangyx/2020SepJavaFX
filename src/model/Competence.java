@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,14 +13,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import controller.Utils;
-import javafx.beans.property.FloatProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TreeItem;
 
 public class Competence {
 	Integer id;
@@ -119,10 +114,10 @@ public class Competence {
 	public Competence(CompetenceBean cp) throws ParseException {
 		this.name = new SimpleStringProperty(cp.getName());
 		
-		Date cDate = new SimpleDateFormat("yyyy-MM-dd").parse(cp.getCreatedDate());
+		Date cDate = new SimpleDateFormat("dd-MM-yyyy").parse(cp.getCreatedDate());
 		LocalDate cLocalDate = cDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	
-		Date mDate = new SimpleDateFormat("yyyy-MM-dd").parse(cp.getLastModifiedDate());
+		Date mDate = new SimpleDateFormat("dd-MM-yyyy").parse(cp.getLastModifiedDate());
 		LocalDate mLocalDate = mDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		
 		this.createdDate = new SimpleObjectProperty(cLocalDate);
