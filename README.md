@@ -3,8 +3,8 @@
 ``With a simple JavaFX GUI provided. `` 
 
 
-More info check : 
-https://docs.google.com/document/d/1OUVQ2b0AfyAf6QPNXJvLZv4sjVzzpPYu5pRXIeGAbZc/edit?usp=sharing 
+More info check [doc](https://docs.google.com/document/d/1OUVQ2b0AfyAf6QPNXJvLZv4sjVzzpPYu5pRXIeGAbZc/edit?usp=sharing )
+
 
 ## How to use
 
