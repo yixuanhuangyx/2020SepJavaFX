@@ -4,7 +4,10 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,6 +34,7 @@ import model.Croyance;
 import model.DataTreeViewRoot;
 import model.Etudiant;
 import model.EtudiantBean;
+import model.Prerequise;
 import model.Workspace;
 
 public class Controller {
@@ -142,9 +146,14 @@ public class Controller {
 	private TreeView<Object> cp_prerequises;
 	//private ListView<Object> cp_prerequises;
 	@FXML
+	private TextField cp_pre_value;
+	@FXML
 	private Button addPreBtn;
 	@FXML
 	private Label preNumberLabel;
+	 
+	private TreeItem<Object> prerequises;
+	private TreeItem<Object> preSelected;
 	
 
 	
@@ -178,20 +187,10 @@ public class Controller {
 		
 		cpPane.visibleProperty().setValue(false);
 		
-		cp = new Competence();
-
-		cp_name.textProperty().bindBidirectional(cp.nameProperty());
-		cp_createdDate.valueProperty().bindBidirectional(cp.createdDateProperty());
-		cp_modifiedDate.valueProperty().bindBidirectional(cp.lastModifiedDateProperty());
-		
-		cp_croyance.textProperty().bindBidirectional(cp.croyanceProperty());
-		cp_etat.textProperty().bindBidirectional(cp.etatProperty());
-		
-		cp_note.textProperty().bindBidirectional(cp.noteEvaluationProperty());
-		cp_x.textProperty().bindBidirectional(cp.xProperty());
-		cp_r.textProperty().bindBidirectional(cp.rProperty());
+		initializeCp();
 	
-
+			
+//		cp_pre_value.textProperty().bindBidirectional(cp.listPresProperty());
 //		sexGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
 //			if (sexGroup.getSelectedToggle() != null) {
 //				contact.sexProperty().setValue(((RadioButton) sexGroup.getSelectedToggle()).getText());
@@ -203,15 +202,15 @@ public class Controller {
 
 
 		// force the field to be numeric only
-		cp_note.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("^[-+]?\\d*\\.?\\d*$")) {
-		            cp_note.setText("");
-		        }
-		    }
-		});
+//		cp_note.textProperty().addListener(new ChangeListener<String>() {
+//		    @Override
+//		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+//		        String newValue) {
+//		        if (!newValue.matches("^[-+]?\\d*\\.?\\d*$")) {
+//		            cp_note.setText("");
+//		        }
+//		    }
+//		});
 		
 		addEventToTransformationBtn();
 		addEventToRevisionBtn();
@@ -240,6 +239,21 @@ public class Controller {
 		loadData();
 	}
 	
+	private void initializeCp() {
+		cp = new Competence();
+
+		cp_name.textProperty().bindBidirectional(cp.nameProperty());
+		cp_createdDate.valueProperty().bindBidirectional(cp.createdDateProperty());
+		cp_modifiedDate.valueProperty().bindBidirectional(cp.lastModifiedDateProperty());
+		
+		cp_croyance.textProperty().bindBidirectional(cp.croyanceProperty());
+		cp_etat.textProperty().bindBidirectional(cp.etatProperty());
+		
+		cp_note.textProperty().bindBidirectional(cp.noteEvaluationProperty());
+		cp_x.textProperty().bindBidirectional(cp.xProperty());
+		cp_r.textProperty().bindBidirectional(cp.rProperty());
+	}
+	
 	private void loadData() {
 		try {
 			etus.clear();
@@ -265,7 +279,6 @@ public class Controller {
 		h = change ->{
 			change.next();
 			if (change.wasRemoved()) {
-				//remove from treeview
 				TreeItem<Object> parentEtudiant = treeItemSelected.getParent();
 				parentEtudiant.getChildren().remove(treeItemSelected);
 			}
@@ -276,7 +289,6 @@ public class Controller {
 				});
 			}
 		};
-		
 		
 		ListChangeListener<Object> f;
 		f = change -> {
@@ -293,7 +305,24 @@ public class Controller {
 			}
 		};
 		
+		ListChangeListener<Object> k;
+		k = change -> {
+			change.next();
+			if (change.wasRemoved()) {
+				prerequises.getChildren().remove(preSelected);
+			}
+			if (change.wasAdded()) {
+				change.getAddedSubList().forEach(item -> {
+					TreeItem<Object> preLeaf = new TreeItem<Object>(item);
+					prerequises.getChildren().add(preLeaf);
+				});
+			}
+		};
+		
 		for(Etudiant etu: etus) {
+			for(Competence cp: etu.listCpsProperty()) {
+				cp.listPresProperty().addListener(k);
+			}
 			etu.listCpsProperty().addListener(h);
 		}
 		etus.addListener(f);
@@ -303,18 +332,44 @@ public class Controller {
 		TreeItem<Object> preTreeItem = new TreeItem<Object>("Prerequises");
 		preTreeItem.setExpanded(true);
 		
-		Map<String, Float> presMap = cp.getPrerequises();
-		for (Map.Entry<String,Float> entry : presMap.entrySet()) {
-			TreeItem<Object> preLeaf = new TreeItem<Object>(entry.getKey()+":"+entry.getValue());
-			preTreeItem.getChildren().add(preLeaf);
-		}
-//		for (Prerequises pre : cpSelected.getListPres()) {
+//		for (Prerequise pre : cp.listPresProperty()) {
 //			TreeItem<Object> preLeaf = new TreeItem<Object>(pre);
+//			preTreeItem.getChildren().add(preLeaf);
+//		}
+		
+		if(cp.getPrerequises()!=null) {
+	        for (Entry<String, String> entry : cp.getPrerequises().entrySet())  {
+	            System.out.println("Key = " + entry.getKey() + 
+	                             ", Value = " + entry.getValue()); 
+	            Prerequise preObj = new Prerequise(entry.getKey(),entry.getValue());
+				TreeItem<Object> preLeaf = new TreeItem<Object>(preObj);
+				preTreeItem.getChildren().add(preLeaf);
+	        }
+		}
+
+//		Map<String, Float> presMap = cp.getPrerequises();
+//		if(presMap != null) {
+//			for (Map.Entry<String,Float> entry : presMap.entrySet()) {
+//				TreeItem<Object> preLeaf = new TreeItem<Object>("Competence Name : "+entry.getKey());
+//				TreeItem<Object> preDistanceLeaf = new TreeItem<Object>("Distance : "+entry.getValue());
+//				preLeaf.getChildren().add(preDistanceLeaf);
+//				preTreeItem.getChildren().add(preLeaf);
+//			}
 //		}
 		TreeView<Object> preTreeView = new TreeView<Object>(preTreeItem);
 		preTreeView.setEditable(true);
-		
+		preTreeView.setCellFactory(param -> new preTreeCellImpl());
 		prePane.getChildren().add(preTreeView);
+		
+//		if(presMap != null)
+//			preNumberLabel.setText("Total(n) : "+presMap.size());
+//		else 
+//			preNumberLabel.setText("Total(n) : 0");
+		if(cp.getPrerequises()==null) {
+			preNumberLabel.setText("Total(n) : 0");
+		}else {
+			preNumberLabel.setText("Total(n) : "+cp.getPrerequises().size());
+		}	
 	}
 	
 	private void initializeTree() {
@@ -351,6 +406,7 @@ public class Controller {
 				root.racineSelectedProperty().set(false);
 				cpPane.visibleProperty().set(false);
 				
+				
 				treeItemSelected = newVal;
 			}else if(newVal.getValue() instanceof Competence) {
 				etuSelected = null;
@@ -369,11 +425,15 @@ public class Controller {
 				cp.croyanceProperty().setValue(((Competence)newVal.getValue()).croyanceProperty().get());
 				cp.etatProperty().setValue(((Competence)newVal.getValue()).etatProperty().get());
 				
-				Map<String, Float> prerequises = new HashMap<>();
-				prerequises.put(((Competence)newVal.getValue()).nameProperty().get()+"pre1", (float) 1);				
-				prerequises.put(((Competence)newVal.getValue()).nameProperty().get()+"pre2", (float) 2);
-				cp.setPrerequises(prerequises);
-
+//				test/debug:
+//				Map<String, Float> prerequises = new HashMap<>();
+//				prerequises.put(((Competence)newVal.getValue()).nameProperty().get()+"pre1", (float) 1);				
+//				prerequises.put(((Competence)newVal.getValue()).nameProperty().get()+"pre2", (float) 2);
+//				cp.setPrerequises(prerequises);
+				Map<String,String> value = ((Competence)newVal.getValue()).getPrerequises();
+				cp.setPrerequises(value);
+				
+				
 				treeItemSelected = newVal;
 
 				initializePreTree();
@@ -399,6 +459,20 @@ public class Controller {
 	
 	private void addEventToCreateNewPreBtn() {
 		addPreBtn.setOnAction(event -> {
+			Prerequise pre = new Prerequise("Unknown","Unknown");
+//			cp.listPresProperty().add(pre);
+			Map<String,String> preMap = cp.getPrerequises();
+//			Float distance = (pre.getDistance().equals("Unknown")? 0.0f : pre.getDistance());
+			preMap.put(
+					pre.getName(),
+					pre.getDistance()
+			);
+			cp.setPrerequises(preMap);
+			initializePreTree();
+			//
+			//
+			//
+			//
 			
 		});
 	}
@@ -520,7 +594,6 @@ public class Controller {
 	
 	
 	private Competence addCompetence() {
-		Competence cp;
 		
 		String name = cp_name.getText();
 		LocalDate createdDate = cp_createdDate.getValue();
@@ -531,7 +604,20 @@ public class Controller {
 		String croyance = cp_croyance.getText();
 		String etat = cp_etat.getText();
 		
-		cp = new Competence(name,createdDate,modifiedDate,note,x,r,croyance,etat);
+//		List<Prerequise> listPre = cp.listPresProperty().stream().collect(Collectors.toList());
+		
+		List<Prerequise> listPreRes = new ArrayList<>();
+		if(cp.getPrerequises()!=null) {
+	        for (Entry<String, String> entry : cp.getPrerequises().entrySet())  {
+	            System.out.println("Key = " + entry.getKey() + 
+	                             ", Value = " + entry.getValue()); 
+	            Prerequise preObj = new Prerequise(entry.getKey(),entry.getValue());
+	            listPreRes.add(preObj);
+	        }
+		}
+		
+		Competence cp;
+		cp = new Competence(name,createdDate,modifiedDate,note,x,r,croyance,etat,listPreRes);
 		
 		return cp;
 	}
@@ -696,6 +782,89 @@ public class Controller {
 				return getItem() == null ? "" : ((Competence) getItem()).nameProperty().getValue();
 			}
 		}
+	}
+	
+
+	private final class preTreeCellImpl extends TreeCell<Object> {
+
+		private TextField textField;
+
+		public preTreeCellImpl() {
+		}
+
+		@Override
+		public void startEdit() {
+			if (!(getTreeItem().getValue() instanceof Prerequise)) {
+				return;
+			}
+
+			super.startEdit();
+			if (textField == null) {
+				createTextField();
+			}
+
+			System.out.println("startEdit");
+			setText(null);
+			setGraphic(textField);
+			textField.selectAll();
+		}
+
+		@Override
+		public void cancelEdit() {
+			super.cancelEdit();
+			System.out.println("cancelEdit");
+			setText(getString());
+			setGraphic(getTreeItem().getGraphic());
+		}
+
+		@Override
+		public void updateItem(Object item, boolean empty) {
+			super.updateItem(item, empty);
+			if (empty) {
+				setText(null);
+				setGraphic(null);
+			} else {
+				if (isEditing()) {
+					if (textField != null) {
+						textField.setText(getString());
+					}
+					setText(null);
+					setGraphic(textField);
+				} else {
+					setText(getString());
+					setGraphic(getTreeItem().getGraphic());
+				}
+			}
+		}
+
+		private void createTextField() {
+
+			System.out.println("createTextField");
+			textField = new TextField(((Prerequise) getItem()).toListOutputString());
+			textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+				@Override
+				public void handle(KeyEvent t) {
+					if (t.getCode() == KeyCode.ENTER) {
+						System.out.println("commitEdit");
+						((Prerequise) getTreeItem().getValue()).setInput(textField.getText());
+						commitEdit(((Prerequise) getTreeItem().getValue())); 
+						cp.addPrerequises(((Prerequise) getTreeItem().getValue()));
+					} else if (t.getCode() == KeyCode.ESCAPE) {
+						cancelEdit();
+					}
+				}
+			});
+		}
+		
+		private String getString() {
+			if (getItem() instanceof Prerequise) {
+				return getItem() == null ? "" : ((Prerequise) getItem()).toListOutputString();
+			} else {//(getItem() instanceof String) 
+				return getItem() == null ? "" : (String) getItem();
+			} 
+		}
+
 	}
 	
 }

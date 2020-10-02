@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import controller.Utils;
@@ -19,7 +20,9 @@ public class CompetenceBean {
 	String etat;
 	
 	Map<Integer, Float> prerequises;	// <id, distance> 
-	
+	ArrayList<PrerequiseBean> pres = new ArrayList<PrerequiseBean>();
+
+
 
 	public CompetenceBean() {
 		name = "";
@@ -41,10 +44,21 @@ public class CompetenceBean {
 		r = g.rProperty().getValue();
 		croyance = g.croyanceProperty().getValue();
 		etat = g.etatProperty().getValue();
+		
+		for(Prerequise pre: g.listPresProperty()) {
+			this.pres.add(new PrerequiseBean(pre));
+		}
 	}
 
 
+	public ArrayList<PrerequiseBean> getPres() {
+		return pres;
+	}
 
+	public void setPres(ArrayList<PrerequiseBean> pres) {
+		this.pres = pres;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

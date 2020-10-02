@@ -5,8 +5,12 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import controller.Utils;
 import javafx.beans.property.FloatProperty;
@@ -14,6 +18,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TreeItem;
 
 public class Competence {
 	Integer id;
@@ -26,22 +33,40 @@ public class Competence {
 	StringProperty x;
 	StringProperty r;
 	
-	StringProperty croyance; 
-	// TODO: toJsonObject
-	// TODO: get separed field
+	StringProperty croyance; // TODO: toJsonObject / get separed field
 	StringProperty etat;
 	
-	Map<String, Float> prerequises;	// <id, distance> 
+	
+	Map<String, String> prerequises = new HashMap<>();	// <name, distance> 
+	ObservableList<Prerequise> listPres;
 	
 	
-	public Map<String, Float> getPrerequises() {
+	
+	
+	public ObservableList<Prerequise> listPresProperty() {
+		return listPres;
+	}
+	
+	public Map<String, String> getPrerequises() {
 		return prerequises;
 	}
 
-	public void setPrerequises(Map<String, Float> prerequises) {
-		this.prerequises = prerequises;
+	public void addPrerequises(Prerequise pre) {
+		this.prerequises.put(pre.getName(),pre.getDistance());
+	}
+	
+	public void setPrerequises(Map<String, String> prerequises) {
+//		this.prerequises = prerequises;
+		
+		if (prerequises == null) return;
+        for (Entry<String, String> entry : prerequises.entrySet())  {
+        	this.prerequises.put(entry.getKey(),entry.getValue());
+        }
 	}
 
+	
+	
+	
 	public Competence() {
 		this.name = new SimpleStringProperty();
 		this.createdDate = new SimpleObjectProperty();
@@ -51,6 +76,8 @@ public class Competence {
 		this.r = new SimpleStringProperty();
 		this.croyance = new SimpleStringProperty();
 		this.etat = new SimpleStringProperty();
+		
+		this.listPres = FXCollections.observableArrayList(new ArrayList<Prerequise>());
 	}
 	
 	public Competence(
@@ -61,7 +88,8 @@ public class Competence {
 			String x,
 			String r,
 			String croyance,
-			String etat
+			String etat,
+			List<Prerequise> listPres
 			) {
 		this.name = new SimpleStringProperty(name);
 		this.createdDate = new SimpleObjectProperty(create);
@@ -71,6 +99,8 @@ public class Competence {
 		this.r = new SimpleStringProperty(r);
 		this.croyance = new SimpleStringProperty(croyance);
 		this.etat = new SimpleStringProperty(etat);
+		
+		this.listPres = FXCollections.observableArrayList(listPres);
 	}
 	
 	public Competence(CompetenceBean cp) throws ParseException {
@@ -90,6 +120,11 @@ public class Competence {
 		this.r = new SimpleStringProperty(cp.getR());
 		this.croyance = new SimpleStringProperty(cp.getCroyance());
 		this.etat = new SimpleStringProperty(cp.getEtat());
+		
+		this.listPres = FXCollections.observableArrayList();
+		for(PrerequiseBean preValue: cp.getPres()) {
+			listPres.add(new Prerequise(preValue));
+		}
 	}
 	
 	public StringProperty nameProperty() {

@@ -221,9 +221,15 @@
                                                                         <Font size="26.0" />
                                                                      </font>
                                                                   </Label>
+                                                                  <Label prefHeight="35.0" prefWidth="431.0" text="Name:Distance" GridPane.rowIndex="1">
+                                                                     <font>
+                                                                        <Font size="26.0" />
+                                                                     </font>
+                                                                  </Label>
                                                                </children>
                                                             </GridPane>
                                                             <TreeView fx:id="cp_prerequises" prefHeight="153.0" prefWidth="460.0" />
+                                                            <TextField fx:id="cp_pre_value" disable="true" visible="false" />
                                                          </children>
                                                       </GridPane>
                                                    </children>
