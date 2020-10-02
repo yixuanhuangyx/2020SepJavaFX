@@ -59,7 +59,8 @@ public class Competence {
 	
 	public void setPrerequises(Map<String, String> prerequises) {
 //		this.prerequises = prerequises;
-		
+
+		this.prerequises = new HashMap<>();	
 		if (prerequises == null) return;
         for (Entry<String, String> entry : prerequises.entrySet())  {
         	this.prerequises.put(entry.getKey(),entry.getValue());
@@ -132,6 +133,7 @@ public class Competence {
 
 		this.prerequises = new HashMap<>();
 		if(cp.getPrerequises()!=null) {
+			Map<String, String> test = cp.getPrerequises();
 	        for (Entry<String, String> entry : cp.getPrerequises().entrySet())  {
 	            this.prerequises.put(entry.getKey(),entry.getValue());
 	        }

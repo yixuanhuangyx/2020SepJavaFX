@@ -364,6 +364,7 @@ public class Controller {
 		if(cp.getPrerequises()==null) {
 			preNumberLabel.setText("Total(n) : 0");
 		}else {
+			Map<String,String> test = cp.getPrerequises();
 			preNumberLabel.setText("Total(n) : "+cp.getPrerequises().size());
 		}	
 	}
