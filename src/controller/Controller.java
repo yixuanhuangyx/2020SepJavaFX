@@ -337,8 +337,6 @@ public class Controller {
 		
 		if(cp.getPrerequises()!=null) {
 	        for (Entry<String, String> entry : cp.getPrerequises().entrySet())  {
-	            System.out.println("Key = " + entry.getKey() + 
-	                             ", Value = " + entry.getValue()); 
 	            Prerequise preObj = new Prerequise(entry.getKey(),entry.getValue());
 				TreeItem<Object> preLeaf = new TreeItem<Object>(preObj);
 				preTreeItem.getChildren().add(preLeaf);
@@ -606,9 +604,7 @@ public class Controller {
 		
 		List<Prerequise> listPreRes = new ArrayList<>();
 		if(cp.getPrerequises()!=null) {
-	        for (Entry<String, String> entry : cp.getPrerequises().entrySet())  {
-	            System.out.println("Key = " + entry.getKey() + 
-	                             ", Value = " + entry.getValue()); 
+	        for (Entry<String, String> entry : cp.getPrerequises().entrySet())  { 
 	            Prerequise preObj = new Prerequise(entry.getKey(),entry.getValue());
 	            listPreRes.add(preObj);
 	        }

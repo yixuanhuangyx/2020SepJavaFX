@@ -190,7 +190,8 @@ public class Competence {
 
 		this.croyance.setValue("");
 		this.etat.setValue("");
-		
+
+		this.prerequises = new HashMap<>();	
 //		Map<Integer, Float> prerequises;	
 	}
 	
@@ -205,6 +206,14 @@ public class Competence {
 
 		this.croyance.setValue(newCp.croyanceProperty().getValue());
 		this.etat.setValue(newCp.etatProperty().getValue());
+		
+		
+		this.prerequises = new HashMap<>();
+		if(newCp.getPrerequises()!=null) {
+	        for (Entry<String, String> entry : newCp.getPrerequises().entrySet())  {
+	            this.prerequises.put(entry.getKey(),entry.getValue());
+	        }
+		}
 	}
 	
 }

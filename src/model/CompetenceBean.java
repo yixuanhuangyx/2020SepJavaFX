@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -35,6 +36,7 @@ public class CompetenceBean {
 		r = "";
 		croyance = "";
 		etat = "";
+		this.prerequises = new HashMap<>();
 	}
 	
 	public CompetenceBean(Competence g) {
@@ -47,23 +49,30 @@ public class CompetenceBean {
 		croyance = g.croyanceProperty().getValue();
 		etat = g.etatProperty().getValue();
 		
-		for(Prerequise pre: g.listPresProperty()) {
-			this.prerequises.put(pre.getName(), pre.getDistance());
-//			this.pres.add(new PrerequiseBean(pre));
+
+		this.prerequises = new HashMap<>();
+		if(g.listPresProperty()!=null) {
+			for(Prerequise pre: g.listPresProperty()) {
+				this.prerequises.put(pre.getName(), pre.getDistance());
+//				this.pres.add(new PrerequiseBean(pre));
+			}
+			
 		}
 	}
 
 
-	public ArrayList<PrerequiseBean> getPres() {
-		ArrayList<PrerequiseBean> res = new ArrayList<PrerequiseBean>();
-		if(this.prerequises!=null) {
-	        for (Entry<String, String> entry : this.prerequises.entrySet())  {
-	            PrerequiseBean preBean = new PrerequiseBean(entry.getKey(),entry.getValue());
-				res.add(preBean);
-	        }
-		}
-		return res;
-	}
+//	public ArrayList<PrerequiseBean> getPre() {
+//
+//		this.prerequises = new HashMap<>();
+//		ArrayList<PrerequiseBean> res = new ArrayList<PrerequiseBean>();
+//		if(this.prerequises!=null) {
+//	        for (Entry<String, String> entry : this.prerequises.entrySet())  {
+//	            PrerequiseBean preBean = new PrerequiseBean(entry.getKey(),entry.getValue());
+//				res.add(preBean);
+//	        }
+//		}
+//		return res;
+//	}
 
 //	public void setPres(ArrayList<PrerequiseBean> pres) {
 //		this.pres = pres;
