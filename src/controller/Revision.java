@@ -1,7 +1,6 @@
 package controller;
 
 import model.Croyance;
-import model.etatEnum;
 
 public class Revision {
 
