@@ -179,6 +179,7 @@ public class Controller {
 		System.out.println("initialize  controller ----");
 		
 		cpPane.visibleProperty().setValue(false);
+		saveBtn.visibleProperty().set(false);
 		
 		initializeCp();
 
@@ -368,6 +369,7 @@ public class Controller {
 				
 				root.racineSelectedProperty().set(true);
 				cpPane.visibleProperty().set(false);
+				saveBtn.visibleProperty().set(false);
 				
 				newVal.setExpanded(true);
 			}else if(newVal.getValue() instanceof Etudiant) {
@@ -375,6 +377,7 @@ public class Controller {
 				
 				root.racineSelectedProperty().set(false);
 				cpPane.visibleProperty().set(false);
+				saveBtn.visibleProperty().set(false);
 				
 				
 				treeItemSelected = newVal;
@@ -383,6 +386,7 @@ public class Controller {
 				
 				root.racineSelectedProperty().set(false);
 				cpPane.visibleProperty().set(true);
+				saveBtn.visibleProperty().set(true);
 				
 				cp.nameProperty().setValue(((Competence)newVal.getValue()).nameProperty().get());
 				LocalDate date = ((Competence)newVal.getValue()).createdDateProperty().get();
@@ -414,10 +418,14 @@ public class Controller {
 				//remove the competence
 				((Etudiant)treeItemSelected.getParent().getValue()).listCpsProperty().remove(treeItemSelected.getValue());
 				cpPane.visibleProperty().set(false);
+				saveBtn.visibleProperty().set(false);
+				saveData();
 			} else if (etuSelected != null) {
 				// remove a student
 				etus.remove(treeItemSelected.getValue());
 				cpPane.visibleProperty().set(false);
+				saveBtn.visibleProperty().set(false);
+				saveData();
 			}
 		});	
 	}
@@ -442,7 +450,7 @@ public class Controller {
 		deletePreBtn.setOnAction(event -> {
 			Prerequise test = (Prerequise) preSelected.getValue();
 			cp.removePre(test);
-
+			
 			initializePreTree();
 		});
 	}	
@@ -451,11 +459,14 @@ public class Controller {
 		createNewBtn.setOnAction(event -> {
 			if(root.racineSelectedProperty().getValue()) {
 				cpPane.visibleProperty().set(false);
+				saveBtn.visibleProperty().set(false);
 				Etudiant newEtu = new Etudiant();
 				etus.add(newEtu);
 			}else if(etuSelected != null) {
 				cpPane.visibleProperty().set(true);
+				saveBtn.visibleProperty().set(true);
 				cp.videCompetence();
+				initializePreTree();
 			}
 		});
 	}
@@ -533,26 +544,25 @@ public class Controller {
 			if(etuSelected != null && dataValidated == true) {
 				Competence newCp = addCompetence();
 				etuSelected.listCpsProperty().add(newCp);
-				try {
-					workspace.setData(etus);
-					workspace.save(file);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
+				saveData();
 			}else if(etuSelected == null && dataValidated == true) {
 				Competence newCp = addCompetence();
 				((Competence)treeItemSelected.getValue()).editCp(newCp);
-				try {
-					workspace.setData(etus);
-					workspace.save(file);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
+				saveData();
 			}
 			
 		});
 		
 		
+	}
+	
+	private void saveData() {
+		try {
+			workspace.setData(etus);
+			workspace.save(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 	}
 	
 	
