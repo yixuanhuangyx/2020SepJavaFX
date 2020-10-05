@@ -38,7 +38,7 @@
                                        <content>
                                           <ScrollPane prefHeight="150.0" prefWidth="1092.0">
                                             <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="152.0" prefWidth="1083.0">
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="141.0" prefWidth="1083.0">
                                                    <children>
                                                       <GridPane layoutY="10.0" prefHeight="131.0" prefWidth="1079.0">
                                                          <children>
@@ -82,103 +82,131 @@
                                              <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="1076.0">
                                                    <children>
-                                                      <GridPane layoutX="-17.0" layoutY="1.0" prefHeight="246.0" prefWidth="1079.0">
+                                                      <GridPane prefHeight="257.0" prefWidth="1071.0">
+                                                        <columnConstraints>
+                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        </rowConstraints>
                                                          <children>
-                                                            <Label text="Croyance" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="26.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <TextField fx:id="cp_croyance" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="26.0" />
-                                                               </font>
-                                                            </TextField>
-                                                            <Label prefHeight="35.0" prefWidth="379.0" text="Etat" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                               <font>
-                                                                  <Font size="26.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <TextField fx:id="cp_etat" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                                               <font>
-                                                                  <Font size="26.0" />
-                                                               </font>
-                                                            </TextField>
-                                                            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                              <columnConstraints>
-                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="187.0" />
-                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="10.0" prefWidth="193.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="43.0" />
-                                                              </columnConstraints>
-                                                              <rowConstraints>
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                              </rowConstraints>
+                                                            <GridPane prefHeight="246.0" prefWidth="1079.0">
                                                                <children>
-                                                                  <Label prefHeight="35.0" prefWidth="431.0" text="Evaluation note">
+                                                                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                     <children>
+                                                                        <Label prefHeight="35.0" prefWidth="431.0" text="Evaluation note">
+                                                                           <font>
+                                                                              <Font size="26.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="cp_note" GridPane.columnIndex="1">
+                                                                           <font>
+                                                                              <Font size="26.0" />
+                                                                           </font>
+                                                                        </TextField>
+                                                                     </children>
+                                                                     <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="187.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="10.0" prefWidth="193.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="43.0" />
+                                                                     </columnConstraints>
+                                                                     <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                     </rowConstraints>
+                                                                  </GridPane>
+                                                                  <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                                     <children>
+                                                                        <Label prefHeight="35.0" prefWidth="431.0" text="x">
+                                                                           <font>
+                                                                              <Font size="26.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="cp_r" GridPane.columnIndex="4">
+                                                                           <font>
+                                                                              <Font size="26.0" />
+                                                                           </font>
+                                                                        </TextField>
+                                                                        <Label prefHeight="38.0" prefWidth="121.0" text="r" textAlignment="RIGHT" GridPane.columnIndex="3">
+                                                                           <font>
+                                                                              <Font size="26.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="cp_x" prefHeight="60.0" prefWidth="142.0" GridPane.columnIndex="1">
+                                                                           <font>
+                                                                              <Font size="26.0" />
+                                                                           </font>
+                                                                        </TextField>
+                                                                     </children>
+                                                                     <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="31.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="0.0" prefWidth="149.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="87.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="27.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="130.0" />
+                                                                     </columnConstraints>
+                                                                     <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                     </rowConstraints>
+                                                                  </GridPane>
+                                                                  <Label prefHeight="35.0" prefWidth="431.0" text="Date Evaluation" GridPane.columnIndex="1">
                                                                      <font>
                                                                         <Font size="26.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField fx:id="cp_note" GridPane.columnIndex="1">
-                                                                     <font>
-                                                                        <Font size="26.0" />
-                                                                     </font>
-                                                                  </TextField>
-                                                               </children>
-                                                            </GridPane>
-                                                            <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                                               <children>
-                                                                  <Label prefHeight="35.0" prefWidth="431.0" text="x">
-                                                                     <font>
-                                                                        <Font size="26.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <TextField fx:id="cp_r" GridPane.columnIndex="4">
-                                                                     <font>
-                                                                        <Font size="26.0" />
-                                                                     </font>
-                                                                  </TextField>
-                                                                  <Label prefHeight="38.0" prefWidth="121.0" text="r" textAlignment="RIGHT" GridPane.columnIndex="3">
-                                                                     <font>
-                                                                        <Font size="26.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <TextField fx:id="cp_x" prefHeight="60.0" prefWidth="142.0" GridPane.columnIndex="1">
-                                                                     <font>
-                                                                        <Font size="26.0" />
-                                                                     </font>
-                                                                  </TextField>
+                                                                  <DatePicker fx:id="cp_modifiedDate" GridPane.columnIndex="2" />
                                                                </children>
                                                                <columnConstraints>
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="31.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="0.0" prefWidth="149.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="87.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="27.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="130.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="6.0" prefWidth="129.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="719.0" minWidth="10.0" prefWidth="461.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="694.0" minWidth="10.0" prefWidth="437.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="107.0" />
                                                                </columnConstraints>
                                                                <rowConstraints>
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
                                                                </rowConstraints>
                                                             </GridPane>
-                                                            <Label prefHeight="35.0" prefWidth="431.0" text="Date Evaluation" GridPane.columnIndex="1">
-                                                               <font>
-                                                                  <Font size="26.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <DatePicker fx:id="cp_modifiedDate" GridPane.columnIndex="2" />
+                                                            <GridPane prefHeight="246.0" prefWidth="1079.0" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Label text="Croyance" GridPane.columnIndex="1">
+                                                                     <font>
+                                                                        <Font size="26.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField fx:id="cp_croyance" GridPane.columnIndex="2">
+                                                                     <font>
+                                                                        <Font size="26.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                                  <Label prefHeight="35.0" prefWidth="379.0" text="Etat" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                     <font>
+                                                                        <Font size="26.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField fx:id="cp_etat" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                                     <font>
+                                                                        <Font size="26.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                                  <Button fx:id="transCalculateBtn" mnemonicParsing="false" prefHeight="56.0" prefWidth="223.0" text="Transformation" GridPane.columnIndex="3">
+                                                                     <font>
+                                                                        <Font size="26.0" />
+                                                                     </font>
+                                                                  </Button>
+                                                               </children>
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="6.0" prefWidth="37.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="719.0" minWidth="10.0" prefWidth="135.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="760.0" minWidth="10.0" prefWidth="537.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="362.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                            </GridPane>
                                                          </children>
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="6.0" prefWidth="129.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="719.0" minWidth="10.0" prefWidth="461.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="694.0" minWidth="10.0" prefWidth="437.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="107.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
                                                       </GridPane>
                                                    </children>
                                                 </AnchorPane>
@@ -273,9 +301,9 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="212.0" text="Save" GridPane.columnIndex="1">
+                                    <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="212.0" text="Save" textFill="#f81414" GridPane.columnIndex="1">
                                        <font>
-                                          <Font size="26.0" />
+                                          <Font name="Arial Black" size="26.0" />
                                        </font>
                                     </Button>
                                  </children>

@@ -21,6 +21,16 @@ public class Utils {
 			output.setText("Veuillez entrer la valeur valid¨¦e ");
 			return false;
 		}
+		text.setStyle("-fx-text-inner-color: black;");
+		return true;
+	}
+	
+	public static boolean checkInput(TextField text) {
+		if(!isNumeric(text.getText())) {
+			text.setStyle("-fx-text-inner-color: red;");
+			return false;
+		}
+		text.setStyle("-fx-text-inner-color: black;");
 		return true;
 	}
 	

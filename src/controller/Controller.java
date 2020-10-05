@@ -143,6 +143,8 @@ public class Controller {
 	@FXML
 	private Button deletePreBtn;
 	@FXML
+	private Button transCalculateBtn;
+	@FXML
 	private Label preNumberLabel;
 	 
 	private TreeItem<Object> prerequises;
@@ -204,8 +206,11 @@ public class Controller {
 		addEventToSaveBtn();
 		addEventToDeleteBtn();
 		
+		addEventToTransCalculateBtn();
+		
 		addEventToCreateNewPreBtn();
 		addEventToDeletePreBtn();
+	
 		
 		//-- addEventToMenuBar()
 //		@FXML 
@@ -468,6 +473,19 @@ public class Controller {
 				cp.videCompetence();
 				initializePreTree();
 			}
+		});
+	}
+	
+	private void addEventToTransCalculateBtn() {
+		transCalculateBtn.setOnAction(event -> {
+			if(Utils.checkInput(cp_note) &&
+				Utils.checkInput(cp_x) &&
+				Utils.checkInput(cp_r) 			
+			) {
+					Croyance res = Transformation.fonctionsTransformation(Utils.getNumber(cp_note),Utils.getNumber(cp_x),Utils.getNumber(cp_r));
+					cp_croyance.setText(res.toResString());
+					cp_etat.setText(Utils.getEtat(res).toString());
+				}
 		});
 	}
 	

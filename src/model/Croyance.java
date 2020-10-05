@@ -29,6 +29,9 @@ public class Croyance {
 		return "Croyance [ m(a)=" + a + ", m(non a)=" + n + ", m(i)=" + i + ", m(c)=" + c + " ]";
 	}
 	
+	public String toResString() {
+		return "m(a)=" + a + ", m(non a)=" + n + ", m(i)=" + i + ", m(c)=" + c;
+	}	
 	
 	public float getA() {
 		return a;
